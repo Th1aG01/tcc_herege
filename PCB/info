@@ -1,14 +1,14 @@
 {
-  "uuid": "cc8cb37feb3c57bf10ce5476b6fd7120",
-  "path": "Offline/PCB",
-  "name": "PCB",
+  "uuid": "33d33c0ee219ebe42f9d600c1a69afbf",
+  "path": "Offline/TCC",
+  "name": "TCC",
   "content": "",
   "created_at": "2026-03-30 20:14:46",
-  "updated_at": "2026-10-14 21:10:03",
+  "updated_at": "2026-10-20 16:08:38",
   "stick": "",
   "documents": [
     {
-      "uuid": "4369f98bd32d58d9ebcd82db9cbcebba",
+      "uuid": "90eb3a8e0c2ef72d105172bf9a3c41e3",
       "title": "Placa_ESP",
       "description": "",
       "docType": "1",
@@ -26,7 +26,264 @@
         "82a07d5700b2492da23645080d24718e": 1,
         "462502bbabba408698cca884858f40e6": 1,
         "bdc16ca86d424dc7bd687af51a23afc7": 1,
-        "03f494cad0134c0d89805ed201078461": 1
+        "03f494cad0134c0d89805ed201078461": 1,
+        "d41a73dfb7224b959ba03b845658dc41": 1,
+        "6e7420b4420f4e2882e441a6e3a84c1d": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "Led Lora",
+          1,
+          "LED-TH_LED-DP2-2LED-AMCC",
+          "AMARELO",
+          {
+            "Manufacturer Part": "5600",
+            "Manufacturer": "VccLite",
+            "Supplier": "Digi-Key",
+            "Supplier Part": "L20325-ND"
+          }
+        ],
+        [
+          "2X BATTERY18650",
+          1,
+          "18650-X2",
+          "B2",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "BARRA DE PINOS 10X1",
+          2,
+          "BARRA DE PINOS 1X10",
+          "BARRAMENTO_BAT,P8",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "100nF",
+          2,
+          "CAP-TH_L6.5-W4.0-P5.00-D1.0",
+          "C1,C3",
+          {
+            "Manufacturer Part": "电容15nf100v",
+            "Manufacturer": "null",
+            "Supplier": "LCSC",
+            "Supplier Part": "C26191"
+          }
+        ],
+        [
+          "10µF",
+          1,
+          "CAPACITOR 10UF TH FP",
+          "C2",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "CONECTOR SMA FÊMEA DE FURO PASSANTE EM ÂNGULO RETO DE 90 GRAUS",
+          1,
+          "CONECTOR SMA FÊMEA DE FURO PASSANTE EM ÂNGULO RETO DE 90 GRAUS",
+          "CN1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "CInch Connectivity Solutions Johson",
+            "Supplier": "Digi-Key",
+            "Supplier Part": "142-0303-411"
+          }
+        ],
+        [
+          "Conector Cel.Carga",
+          1,
+          "B4B-XH-A",
+          "CONECTOR_CARGA",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "ESP32-30P",
+          1,
+          "ESP32-DEVKITV1_ESP32-DEVKITV1-30PINS FROM IMUNTLAK BUT FIXED",
+          "ESP32",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "HX711 LOAD CELL AMPLIFIER COMBINE",
+          1,
+          "HX711 LOAD CELL AMPLIFIER HX711 BREAKOUT",
+          "HX711",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "KLEMENS 2X1 WAP EDIT",
+          1,
+          "TERMINALBLOCK_METZCONNECT:TERMINALBLOCK_METZCONNECT_360271_1X01_HORIZONTAL_SCREWM3.0_BOXED",
+          "J1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "Modulo Lora 1276 v2",
+          1,
+          "LORA1276V2",
+          "LORA",
+          {
+            "Manufacturer Part": "2ad66-lorav2",
+            "Manufacturer": "https://www.nicerf.com/",
+            "Supplier": "RF",
+            "Supplier Part": "2ad66-LoRa V2"
+          }
+        ],
+        [
+          "PIN HEADER 2.54 1X8 SCU",
+          1,
+          "HEADER-HEADER-FEMALE-2.54_1X8 SCU",
+          "MEMORIA_FLASH",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "Private",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "PIN4.4",
+          1,
+          "CONNECTOR_PINHEADER_2.54MM:PINHEADER_1X4",
+          "NEO-1M",
+          {
+            "Manufacturer Part": "Female headerHDR1X8-2.54",
+            "Manufacturer": "BOOMELE",
+            "Supplier": "LCSC",
+            "Supplier Part": "C27438"
+          }
+        ],
+        [
+          "TIP120",
+          1,
+          "TIP120_FOOTPRINT",
+          "Q1",
+          {
+            "Manufacturer Part": "TIP120TU",
+            "Manufacturer": "onsemi(安森美)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C900048"
+          }
+        ],
+        [
+          "Resistencia 330Ω",
+          3,
+          "RESISTENCIA 220R",
+          "R1,R2,R3",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "Resistencia 10KΩ",
+          3,
+          "RESISTENCIA 220R",
+          "R4,R5,R6",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "TC4056A MODULE",
+          1,
+          "TC4056A MODULE",
+          "U7",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "Led Execução",
+          1,
+          "LED-TH_LED-DP2-2LED-AMCC",
+          "VERDE",
+          {
+            "Manufacturer Part": "5600",
+            "Manufacturer": "VccLite",
+            "Supplier": "Digi-Key",
+            "Supplier Part": "L20325-ND"
+          }
+        ],
+        [
+          "Led Alimentação",
+          1,
+          "LED-TH_LED-DP2-2LED-AMCC",
+          "VERMELHO",
+          {
+            "Manufacturer Part": "5600",
+            "Manufacturer": "VccLite",
+            "Supplier": "Digi-Key",
+            "Supplier Part": "L20325-ND"
+          }
+        ]
+      ],
+      "updateTime": 1792523318,
+      "createTime": 1774912486,
+      "histories": [],
+      "created_at": "2026-03-30 20:14:46",
+      "updated_at": "2026-10-20 16:08:38"
+    },
+    {
+      "uuid": "201b696ba5c217c25ec7ec52353eabec",
+      "title": "Placa_Bateria",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "1d3e13ed6581407186a1874a775c3e11": 1,
+        "462502bbabba408698cca884858f40e6": 1,
+        "c28f197bc0e747f2962b49f700a679a3": 1
       },
       "BOM": [
         [
@@ -241,257 +498,14 @@
           }
         ]
       ],
-      "updateTime": 1792018607,
-      "createTime": 1774912486,
-      "histories": [],
-      "created_at": "2026-03-30 20:14:46",
-      "updated_at": "2026-10-14 19:56:47"
-    },
-    {
-      "uuid": "b02072466ed722036fab7b01d1984a06",
-      "title": "Sheet_1",
-      "description": "",
-      "docType": "1",
-      "master": "",
-      "thumb": "/images/thumb-default.png",
-      "components": {
-        "1d3e13ed6581407186a1874a775c3e11": 1,
-        "462502bbabba408698cca884858f40e6": 1,
-        "c28f197bc0e747f2962b49f700a679a3": 1
-      },
-      "BOM": [
-        [
-          "Value",
-          "Quantity",
-          "Package",
-          "Components",
-          "CustomPara"
-        ],
-        [
-          "2X BATTERY18650",
-          1,
-          "18650-X2",
-          "B2",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "100nF",
-          2,
-          "CAP-TH_L6.5-W4.0-P5.00-D1.0",
-          "C1,C3",
-          {
-            "Manufacturer Part": "电容15nf100v",
-            "Manufacturer": "null",
-            "Supplier": "LCSC",
-            "Supplier Part": "C26191"
-          }
-        ],
-        [
-          "10µF",
-          2,
-          "CAPACITOR 10UF TH FP",
-          "C2,C4",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "CONECTOR SMA FÊMEA DE FURO PASSANTE EM ÂNGULO RETO DE 90 GRAUS",
-          1,
-          "CONECTOR SMA FÊMEA DE FURO PASSANTE EM ÂNGULO RETO DE 90 GRAUS",
-          "CN1",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "CInch Connectivity Solutions Johson",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "142-0303-411"
-          }
-        ],
-        [
-          "Led Lora",
-          1,
-          "LED-TH_LED-DP2-2LED-AMCC",
-          "D1",
-          {
-            "Manufacturer Part": "5600",
-            "Manufacturer": "VccLite",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "L20325-ND"
-          }
-        ],
-        [
-          "Led Execução",
-          1,
-          "LED-TH_LED-DP2-2LED-AMCC",
-          "D2",
-          {
-            "Manufacturer Part": "5600",
-            "Manufacturer": "VccLite",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "L20325-ND"
-          }
-        ],
-        [
-          "Led Alimentação",
-          1,
-          "LED-TH_LED-DP2-2LED-AMCC",
-          "D3",
-          {
-            "Manufacturer Part": "5600",
-            "Manufacturer": "VccLite",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "L20325-ND"
-          }
-        ],
-        [
-          "Barramento PCB Bateria",
-          1,
-          "BARRAMENTO_PCB_254_10PIN",
-          "P1",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "BARRA DE PINOS 10X1",
-          1,
-          "BARRA DE PINOS 1X10",
-          "P8",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "Resistencia 330Ω",
-          3,
-          "RESISTENCIA 220R",
-          "R1,R2,R3",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "HX711 LOAD CELL AMPLIFIER COMBINE",
-          1,
-          "HX711 LOAD CELL AMPLIFIER HX711 BREAKOUT",
-          "U1",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "Botão On/Off",
-          1,
-          "CONN-TH_2P-P5.00_EDSTL950-2",
-          "U2",
-          {
-            "Manufacturer Part": "EDSTL950/2",
-            "Manufacturer": "EDSTL950/2",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "ED1804-ND"
-          }
-        ],
-        [
-          "Modulo Lora 1276 v2",
-          1,
-          "LORA1276V2",
-          "U3",
-          {
-            "Manufacturer Part": "2ad66-lorav2",
-            "Manufacturer": "https://www.nicerf.com/",
-            "Supplier": "RF",
-            "Supplier Part": "2ad66-LoRa V2"
-          }
-        ],
-        [
-          "ESP32-30P",
-          1,
-          "ESP32-DEVKITV1_ESP32-DEVKITV1-30PINS FROM IMUNTLAK BUT FIXED",
-          "U4",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "Botão Reset",
-          1,
-          "CONN-TH_2P-P5.00_EDSTL950-2",
-          "U5",
-          {
-            "Manufacturer Part": "EDSTL950/2",
-            "Manufacturer": "EDSTL950/2",
-            "Supplier": "Digi-Key",
-            "Supplier Part": "ED1804-ND"
-          }
-        ],
-        [
-          "TC4056A MODULE",
-          1,
-          "TC4056A MODULE",
-          "U7",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "SD CARD MODULE",
-          1,
-          "SD CARD MODULE W/ SD CARD",
-          "U8",
-          {
-            "Manufacturer Part": "sd card module",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ],
-        [
-          "Conector Cel.Carga",
-          1,
-          "B4B-XH-A",
-          "XH1",
-          {
-            "Manufacturer Part": "",
-            "Manufacturer": "",
-            "Supplier": "",
-            "Supplier Part": ""
-          }
-        ]
-      ],
-      "updateTime": 1791925721,
+      "updateTime": 1792432964,
       "createTime": 1791337753,
       "histories": [],
       "created_at": "2026-10-06 22:49:13",
-      "updated_at": "2026-10-13 18:08:41"
+      "updated_at": "2026-10-19 15:02:44"
     },
     {
-      "uuid": "5b96c7c7d4cef9e1b92bb8e6527e02b7",
+      "uuid": "8b749b39af6f913a05e806a44587e562",
       "puuid": "33d33c0ee219ebe42f9d600c1a69afbf",
       "title": "PCB_TCC",
       "filename": "PCB_TCC.json",
@@ -502,6 +516,7 @@
       "components": {
         "aad4283918274b23b245f5909ab234eb": 2,
         "27a94da6fd6547208d833cc052de383a": 1,
+        "2573a608f39645cd80ff8362f90ebef6": 1,
         "153a5046d660430faf2af6ffe29c6b4b": 1,
         "22906e096e1141dd82bbffa1158630fb": 1,
         "ba456c148ec64268978c1bd0a446b09a": 1,
@@ -511,7 +526,8 @@
         "86b7d6999e0742dd97ce23a5b2f2c4b4": 1,
         "15a7cd8417c34d71bc8022977e2f5478": 1,
         "90bf87f21b714fc7a8206a135cb66a6b": 1,
-        "2573a608f39645cd80ff8362f90ebef6": 1
+        "12ca738645d6461aa611ac3a46129a5f": 1,
+        "1b0c931c16d14649921952341ced4040": 1
       },
       "BOM": [
         [
@@ -714,19 +730,19 @@
           }
         ]
       ],
-      "updateTime": 1792023003,
+      "updateTime": 1792523276,
       "createTime": 1791926514,
       "histories": [],
       "created_at": "2026-10-13 18:21:54",
-      "updated_at": "2026-10-14 21:10:03"
+      "updated_at": "2026-10-20 16:07:56"
     }
   ],
   "sort": [
     "90eb3a8e0c2ef72d105172bf9a3c41e3",
     "201b696ba5c217c25ec7ec52353eabec"
   ],
-  "title": "PCB",
-  "foldername": "PCB",
+  "title": "TCC",
+  "foldername": "TCC",
   "schfilename": "TCC.json",
-  "schfilemtime": 1792018607331
+  "schfilemtime": 1792523318555
 }
