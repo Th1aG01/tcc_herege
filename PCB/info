@@ -4,7 +4,7 @@
   "name": "TCC",
   "content": "",
   "created_at": "2026-03-30 20:14:46",
-  "updated_at": "2026-10-20 16:08:38",
+  "updated_at": "2026-10-22 14:57:53",
   "stick": "",
   "documents": [
     {
@@ -402,6 +402,18 @@
           }
         ],
         [
+          "KLEMENS 2X1 WAP EDIT",
+          1,
+          "TERMINALBLOCK_METZCONNECT:TERMINALBLOCK_METZCONNECT_360271_1X01_HORIZONTAL_SCREWM3.0_BOXED",
+          "J1",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
           "Modulo Lora 1276 v2",
           1,
           "LORA1276V2",
@@ -435,6 +447,18 @@
             "Manufacturer": "BOOMELE",
             "Supplier": "LCSC",
             "Supplier Part": "C27438"
+          }
+        ],
+        [
+          "TIP120",
+          1,
+          "TIP120_FOOTPRINT",
+          "Q1",
+          {
+            "Manufacturer Part": "TIP120TU",
+            "Manufacturer": "onsemi(安森美)",
+            "Supplier": "LCSC",
+            "Supplier Part": "C900048"
           }
         ],
         [
@@ -498,17 +522,17 @@
           }
         ]
       ],
-      "updateTime": 1792432964,
+      "updateTime": 1792691444,
       "createTime": 1791337753,
       "histories": [],
       "created_at": "2026-10-06 22:49:13",
-      "updated_at": "2026-10-19 15:02:44"
+      "updated_at": "2026-10-22 14:50:44"
     },
     {
       "uuid": "8b749b39af6f913a05e806a44587e562",
       "puuid": "33d33c0ee219ebe42f9d600c1a69afbf",
-      "title": "PCB_TCC",
-      "filename": "PCB_TCC.json",
+      "title": "PCB_TCC_ESP",
+      "filename": "PCB_TCC_ESP.json",
       "description": "",
       "docType": "3",
       "master": "",
@@ -730,11 +754,76 @@
           }
         ]
       ],
-      "updateTime": 1792523276,
+      "updateTime": 1792691737,
       "createTime": 1791926514,
       "histories": [],
       "created_at": "2026-10-13 18:21:54",
-      "updated_at": "2026-10-20 16:07:56"
+      "updated_at": "2026-10-22 14:55:37"
+    },
+    {
+      "uuid": "ed3ed8edb18e890c31250fc6452eb03a",
+      "puuid": "33d33c0ee219ebe42f9d600c1a69afbf",
+      "title": "PCB_TCC_Bateria",
+      "filename": "PCB_TCC_Bateria.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "b1aad306e1154757b5731700ca3e40f4": 1,
+        "86b7d6999e0742dd97ce23a5b2f2c4b4": 1,
+        "8225f7999a1b4760be50867ef1c3fbd4": 1
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "2X BATTERY18650",
+          1,
+          "18650-X2",
+          "B2",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "BARRA DE PINOS 10X1",
+          1,
+          "BARRA DE PINOS 1X10",
+          "P8",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ],
+        [
+          "TC4056A MODULE",
+          1,
+          "TC4056A MODULE",
+          "U7",
+          {
+            "Manufacturer Part": "",
+            "Manufacturer": "",
+            "Supplier": "",
+            "Supplier Part": ""
+          }
+        ]
+      ],
+      "updateTime": 1792691734,
+      "createTime": 1792691453,
+      "histories": [],
+      "created_at": "2026-10-22 14:50:53",
+      "updated_at": "2026-10-22 14:55:34"
     }
   ],
   "sort": [
@@ -744,5 +833,5 @@
   "title": "TCC",
   "foldername": "TCC",
   "schfilename": "TCC.json",
-  "schfilemtime": 1792523318555
+  "schfilemtime": 1792691444165
 }
