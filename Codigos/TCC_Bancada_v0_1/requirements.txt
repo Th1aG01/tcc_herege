@@ -1,0 +1,2 @@
+# Interface gráfica; processamento usa a biblioteca padrão.
+matplotlib>=3.10,<4
