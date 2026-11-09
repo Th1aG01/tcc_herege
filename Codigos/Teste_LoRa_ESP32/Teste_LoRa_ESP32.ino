@@ -55,6 +55,7 @@ void setup() {
   SPI.begin(PIN_SCK, PIN_MISO, PIN_MOSI, PIN_CS);
   LoRa.setPins(PIN_CS, PIN_RST, PIN_DIO0);
   LoRa.setSPIFrequency(1000000);  // SPI a 1 MHz para a protoboard.
+  LoRa.setSyncWord(145);          // Senha para comunicacao com o outro hardware
 
   Serial.println("\nTESTE LoRa SX1276");
   Serial.println("Antena conectada? Confira antes de transmitir.");
@@ -134,15 +135,21 @@ void loop() {
     return;
   }
 
-  numeroPacote++;
-  LoRa.print("TESTE_LORA_");
-  LoRa.print(numeroPacote);
   txConcluido = false;
-  inicioTx = millis();
-  transmitindo = true;
-  LoRa.endPacket(true);          // Inicia o envio; o sucesso depende de TxDone.
 
-  Serial.print("Enviando pacote ");
-  Serial.println(numeroPacote);
+  Serial.println("Enviando Mensagem " + String(numeroPacote));
+
+  String mensagem = "Funciona";
+  
+  LoRa.beginPacket();
+  inicioTx = millis();
+  LoRa.print(mensagem + " " + String(numeroPacote));
+  LoRa.endPacket();
+  transmitindo = true;
+  LoRa.endPacket(true);
+
+  delay(1000);
+
+  numeroPacote++;
 }
 
