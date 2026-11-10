@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "app_version": "0.1.0",
+  "session_id": "07cb4ce8c4a24cf6b9cb2dfcbdeb577e",
+  "source": "SIMULATED",
+  "test_name": "Demonstração — dados artificiais",
+  "notes": "Exemplo incluído na versão 0.1.0. Sem medições reais.",
+  "started_at": "2026-11-06T19:52:00.644507+00:00",
+  "status": "completed",
+  "simulation": {
+    "duration_s": 12.0,
+    "rate_hz": 80,
+    "peak_n": 1000.0,
+    "seed": 42
+  },
+  "calibration": {
+    "identifier": "SIMULADA-001",
+    "offset_counts": 100000,
+    "newtons_per_count": 0.01
+  },
+  "sample_count": 961,
+  "ended_at": "2026-11-06T19:52:00.649627+00:00"
+}
