@@ -1,0 +1,8 @@
+Bancada de Empuxo V0.13
+Protocolo USB: 2
+Baud: 115200
+Data: 2026-11-15
+Base: V0.12
+Escopo: enquadramento JSON, IDs, deduplicacao, identificacao, estados e conclusoes
+Sem historico e sem integracao Python
+Testes: 35/35 nativos; compilacao ESP32 e hardware pendentes

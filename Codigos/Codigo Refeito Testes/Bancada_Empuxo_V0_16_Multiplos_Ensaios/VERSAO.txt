@@ -1,0 +1,10 @@
+Bancada de Empuxo V0.16
+Base: V0.15
+Protocolo de comandos USB: 2 (extensao de catalogo e metadados)
+Formato de amostra USB/LoRa: 2 (preservado)
+Formato de gravacao LittleFS: 3 (CRC32; arquivo por ensaio)
+Baud: 115200
+Data: 2026-11-15
+Validacao: 118/118 cenarios nativos; compilacao ESP32, upload e hardware pendentes
+LittleFS interno; sem driver SPI externo; sem formatacao automatica
+Sem historico; sem alteracoes Python; sem acionamento de motor

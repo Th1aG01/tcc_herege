@@ -1,0 +1,9 @@
+Bancada de Empuxo V0.15
+Base: V0.14
+Protocolo de comandos USB: 2
+Formato de amostra USB/LoRa: 2 (ensaio_id string propria)
+Formato de gravacao LittleFS: 2 (cabecalho, amostras, rodape)
+Baud: 115200
+Data: 2026-11-15
+Validacao: 78/78 cenarios nativos; compilacao completa ESP32 e hardware pendentes
+Sem historico; sem alteracoes Python; sem acionamento de motor

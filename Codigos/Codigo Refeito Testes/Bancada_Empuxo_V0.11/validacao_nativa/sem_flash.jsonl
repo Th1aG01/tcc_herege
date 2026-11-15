@@ -1,0 +1,6 @@
+{"protocolo":1,"tipo":"evento","ms":0,"codigo":"BOOT","mensagem":"Bancada V0.10 iniciando.","estado":"OCIOSO","amostras_gravadas":0,"amostras_enviadas":0}
+{"protocolo":1,"tipo":"erro","ms":0,"ok":false,"nivel":"ERRO","origem":"Flash","codigo":"FLASH_INICIALIZACAO","mensagem":"Falha ao montar a flash interna."}
+{"protocolo":1,"tipo":"aviso","ms":10,"nivel":"AVISO","origem":"ESP32","codigo":"COEFICIENTE_PADRAO","mensagem":"Coeficiente 1.0 preservado da V0.9. Valores nao representam kgf validados ate calibrar."}
+{"protocolo":1,"tipo":"evento","ms":10,"codigo":"PRONTO","mensagem":"Inicializacao concluida. Consulte STATUS e AJUDA; PRONTO nao garante sensores disponiveis.","estado":"OCIOSO","amostras_gravadas":0,"amostras_enviadas":0}
+{"protocolo":1,"tipo":"status","ms":10,"ok":true,"firmware":"0.10","estado":"OCIOSO","unidade":"kgf","fator_calibracao":1,"origem_coeficiente":"firmware","tara_pronta":true,"hx711_respondendo":true,"memoria_pronta":false,"lora_pronto":true,"lora_ao_vivo":false,"enviando_gravado":false,"motor_implementado":false,"amostras_gravadas":0,"amostras_para_enviar":0,"amostras_enviadas":0}
+{"protocolo":1,"tipo":"erro","ms":10,"comando":"I","ok":false,"nivel":"ERRO","origem":"Flash","codigo":"FLASH_INDISPONIVEL","mensagem":"Memoria flash indisponivel."}

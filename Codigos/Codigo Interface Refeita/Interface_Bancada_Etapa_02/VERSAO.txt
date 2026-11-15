@@ -1,0 +1,6 @@
+Interface Bancada Etapa 02
+Versao: 02
+Data: 2026-11-13
+Anterior: Interface_Bancada_Etapa_01.zip
+Proxima: Interface_Bancada_Etapa_03.zip
+Escopo: interface demonstrativa, sem integracao com hardware.

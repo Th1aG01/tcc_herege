@@ -1,0 +1,6 @@
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"ID_INVALIDO","origem":"USB","descricao":"id deve ser inteiro de 0 a 4294967295."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"CAMPO_DESCONHECIDO","origem":"USB","descricao":"Envelope possui campo nao suportado."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"PROTOCOLO_INVALIDO","origem":"USB","descricao":"Esta versao exige protocolo 2."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":0,"comando":"INICIAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"ID_INVALIDO","origem":"USB","descricao":"id 0 e reservado a descoberta IDENTIFICAR sem sessao."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"COMANDO_INVALIDO","origem":"USB","descricao":"Use nome em maiusculas, sem atalhos."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"ID_INVALIDO","origem":"USB","descricao":"id deve ser inteiro de 0 a 4294967295."}

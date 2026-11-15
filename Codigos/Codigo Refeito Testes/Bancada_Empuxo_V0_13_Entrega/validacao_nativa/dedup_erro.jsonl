@@ -1,0 +1,4 @@
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"comando":"LORA_LIGAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"ENSAIO_INATIVO","origem":"ESP32","descricao":"Inicie um ensaio antes de ligar o LoRa ao vivo."}
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":0,"id":2,"comando":"INICIAR","ok":true,"fase":"aceito","estado":"ADQUIRINDO","lora_ao_vivo":false}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":0,"id":2,"comando":"INICIAR","codigo":"ESTADO_ATUALIZADO","descricao":"Operacao iniciada; conclusao sera informada por evento.","estado":"ADQUIRINDO"}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"comando":"LORA_LIGAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"ENSAIO_INATIVO","origem":"ESP32","descricao":"Inicie um ensaio antes de ligar o LoRa ao vivo."}

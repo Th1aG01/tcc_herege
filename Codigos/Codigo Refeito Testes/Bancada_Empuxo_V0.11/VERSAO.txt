@@ -1,0 +1,7 @@
+Bancada de Empuxo V0.10
+Etapa 1: protocolo serial e diagnosticos
+Data: 2026-11-14
+Base: Bancada_Empuxo_V0.9(2).ino
+Proxima: V0.11
+Interface de referencia: Etapa 06, sem alteracoes
+Validacao: 20/20 cenarios nativos; compilacao ESP32 e hardware pendentes

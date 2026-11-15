@@ -1,0 +1,102 @@
+[
+  {
+    "cenario": "configuracao",
+    "exit_code": 0,
+    "saida": "PASS configuracao"
+  },
+  {
+    "cenario": "enquadramento",
+    "exit_code": 0,
+    "saida": "PASS enquadramento"
+  },
+  {
+    "cenario": "limites",
+    "exit_code": 0,
+    "saida": "PASS limites"
+  },
+  {
+    "cenario": "medicao",
+    "exit_code": 0,
+    "saida": "PASS medicao"
+  },
+  {
+    "cenario": "boot_sem_hx",
+    "exit_code": 0,
+    "saida": "PASS boot_sem_hx"
+  },
+  {
+    "cenario": "tara_incompleta",
+    "exit_code": 0,
+    "saida": "PASS tara_incompleta"
+  },
+  {
+    "cenario": "timeout_hx",
+    "exit_code": 0,
+    "saida": "PASS timeout_hx"
+  },
+  {
+    "cenario": "sem_lora",
+    "exit_code": 0,
+    "saida": "PASS sem_lora"
+  },
+  {
+    "cenario": "sem_flash",
+    "exit_code": 0,
+    "saida": "PASS sem_flash"
+  },
+  {
+    "cenario": "atomicidade",
+    "exit_code": 0,
+    "saida": "PASS atomicidade"
+  },
+  {
+    "cenario": "falha_abertura",
+    "exit_code": 0,
+    "saida": "PASS falha_abertura"
+  },
+  {
+    "cenario": "falha_gravacao",
+    "exit_code": 0,
+    "saida": "PASS falha_gravacao"
+  },
+  {
+    "cenario": "sem_ensaio",
+    "exit_code": 0,
+    "saida": "PASS sem_ensaio"
+  },
+  {
+    "cenario": "retransmissao",
+    "exit_code": 0,
+    "saida": "PASS retransmissao"
+  },
+  {
+    "cenario": "falha_leitura",
+    "exit_code": 0,
+    "saida": "PASS falha_leitura"
+  },
+  {
+    "cenario": "falha_seek",
+    "exit_code": 0,
+    "saida": "PASS falha_seek"
+  },
+  {
+    "cenario": "falha_lora",
+    "exit_code": 0,
+    "saida": "PASS falha_lora"
+  },
+  {
+    "cenario": "leds",
+    "exit_code": 0,
+    "saida": "PASS leds"
+  },
+  {
+    "cenario": "coeficiente_invalido",
+    "exit_code": 0,
+    "saida": "PASS coeficiente_invalido"
+  },
+  {
+    "cenario": "tamanho_amostra",
+    "exit_code": 0,
+    "saida": "Bytes da amostra extrema: 105\nPASS tamanho_amostra"
+  }
+]

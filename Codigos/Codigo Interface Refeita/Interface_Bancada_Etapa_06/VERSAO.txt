@@ -1,0 +1,6 @@
+Interface Bancada Etapa 06
+Versao: 06
+Data: 2026-11-14
+Anterior: Interface_Bancada_Etapa_05.zip
+Proxima: Interface_Bancada_Etapa_07.zip
+Escopo: unidade fixa kgf, remocao de offset e seletor de unidade da tela, log de erros e avisos; sem integracao com hardware.

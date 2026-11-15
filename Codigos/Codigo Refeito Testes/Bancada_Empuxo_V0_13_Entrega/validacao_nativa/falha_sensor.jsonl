@@ -1,0 +1,5 @@
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":true,"fase":"aceito","estado":"ADQUIRINDO","lora_ao_vivo":false}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","codigo":"ESTADO_ATUALIZADO","descricao":"Operacao iniciada; conclusao sera informada por evento.","estado":"ADQUIRINDO"}
+{"protocolo":2,"tipo":"amostra","ensaio_id":1,"tempo_ms":100,"empuxo_kgf":1500,"indice":1}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":2100,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"HX711_TIMEOUT","origem":"HX711","descricao":"Sem novas leituras ha 2000 ms. Reinicie sem carga para refazer a tara."}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":2100,"id":1,"codigo":"ENSAIO_ENCERRADO","fase":"falhou","descricao":"Interrompido por ausencia de leituras do HX711.","estado":"OCIOSO","amostras_gravadas":1,"amostras_enviadas":0}

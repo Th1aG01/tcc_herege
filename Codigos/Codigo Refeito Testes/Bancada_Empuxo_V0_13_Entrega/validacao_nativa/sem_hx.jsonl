@@ -1,0 +1,2 @@
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":0,"id":0,"comando":"IDENTIFICAR","ok":true,"fase":"concluido","dispositivo":"ESP32-AABBCCDDEEFF","modelo":"Bancada_Empuxo_ESP32","firmware":"0.13","baud":115200,"maior_id":0,"rx_max_bytes":512,"rx_timeout_ms":1000,"respostas_retidas":8}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":3000,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"HX711_TARA_TIMEOUT","origem":"HX711","descricao":"Tara inicial incompleta em 3000 ms; reinicie sem carga."}

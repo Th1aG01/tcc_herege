@@ -1,0 +1,2 @@
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"RX_CARACTERE","origem":"USB","descricao":"Linha descartada ate LF: tamanho ou caractere invalido."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"COMANDO_INVALIDO","origem":"USB","descricao":"Nome deve ter 1 a 24 caracteres ASCII."}

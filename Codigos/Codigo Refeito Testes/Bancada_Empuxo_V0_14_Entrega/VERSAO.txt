@@ -1,0 +1,7 @@
+Bancada de Empuxo V0.14
+Base: V0.13
+Protocolo USB: 2 (extensao de calibracao e tara)
+Baud: 115200
+Data: 2026-11-15
+Validacao: 55/55 cenarios nativos; compilacao ESP32 e hardware pendentes
+Sem historico; sem alteracoes Python

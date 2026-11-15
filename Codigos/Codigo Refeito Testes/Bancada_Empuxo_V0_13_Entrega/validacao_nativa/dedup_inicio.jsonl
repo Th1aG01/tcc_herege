@@ -1,0 +1,2 @@
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":true,"fase":"aceito","estado":"ADQUIRINDO","lora_ao_vivo":false}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":100,"id":1,"causado_por":2,"codigo":"ENSAIO_ENCERRADO","fase":"concluido","descricao":"Finalizado por comando.","estado":"OCIOSO","amostras_gravadas":1,"amostras_enviadas":0}

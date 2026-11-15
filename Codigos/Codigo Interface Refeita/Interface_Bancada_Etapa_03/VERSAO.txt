@@ -1,0 +1,6 @@
+Interface Bancada Etapa 03
+Versao: 03
+Data: 2026-11-13
+Anterior: Interface_Bancada_Etapa_02.zip
+Proxima: Interface_Bancada_Etapa_04.zip
+Escopo: memoria e historico demonstrativos, sem integracao com hardware.

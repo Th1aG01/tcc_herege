@@ -1,0 +1,2 @@
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"JSON_INVALIDO","origem":"USB","descricao":"JSON invalido, chaves repetidas ou memoria insuficiente."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":null,"ok":false,"fase":"falha","nivel":"ERRO","codigo":"JSON_INVALIDO","origem":"USB","descricao":"JSON invalido, chaves repetidas ou memoria insuficiente."}

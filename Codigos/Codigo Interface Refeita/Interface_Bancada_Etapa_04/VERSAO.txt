@@ -1,0 +1,6 @@
+Interface Bancada Etapa 04
+Versao: 04
+Data: 2026-11-13
+Anterior: Interface_Bancada_Etapa_03.zip
+Proxima: Interface_Bancada_Etapa_05.zip
+Escopo: perfis de calibracao persistentes no computador, sem integracao com hardware.

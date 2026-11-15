@@ -1,0 +1,6 @@
+Interface Bancada Etapa 05
+Versao: 05
+Data: 2026-11-14
+Anterior: Interface_Bancada_Etapa_04.zip
+Proxima: Interface_Bancada_Etapa_06.zip
+Escopo: importar, exportar e excluir perfis de calibracao salvos no computador, sem integracao com hardware.

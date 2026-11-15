@@ -1,0 +1,5 @@
+Bancada de Empuxo V0.12
+Correcao: API publica LoRa onTxDone; sem pasta historico
+Data: 2026-11-15
+Base disponivel: V0.10
+Caminho informado pelo usuario: V0.11
