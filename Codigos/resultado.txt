@@ -1,0 +1,33 @@
+{"protocolo":2,"tipo":"resposta","sessao":"307EBCE0E5C7CE3F","ms":669299,"id":4,"comando":"INICIAR","ok":true,"fase":"aceito","estado":"PREPARANDO","lora_ao_vivo":false,"ensaio":{"id":"307EBCE0E5C7CE3F-1","solicitacao_id":4,"coeficiente":1,"iniciado":false,"resultado":"PREPARANDO","motivo":"AGUARDANDO_AMOSTRA","duracao_ms":0,"amostras":0,"fechamento_confirmado":false},"calibracao":{"unidade":"kgf","coeficiente":1,"configurada":true,"valida":true,"origem":"comando_usb","validacao_fisica":"responsabilidade_do_operador","pronta_para_uso":true},"tara":{"pronta":true,"em_andamento":false,"leituras":10,"necessarias":10,"timeout_ms":3000}}
+{"protocolo":2,"tipo":"evento","sessao":"307EBCE0E5C7CE3F","ms":669300,"id":4,"comando":"INICIAR","codigo":"ESTADO_ATUALIZADO","descricao":"Operacao iniciada; conclusao sera informada por evento.","estado":"PREPARANDO"}
+{"protocolo":2,"tipo":"evento","sessao":"307EBCE0E5C7CE3F","ms":669326,"id":4,"codigo":"AQUISICAO_INICIADA","fase":"iniciado","estado":"ADQUIRINDO","descricao":"Primeira amostra calibrada gravada; aquisicao em andamento.","ensaio":{"id":"307EBCE0E5C7CE3F-1","solicitacao_id":4,"coeficiente":1,"iniciado":true,"resultado":"ADQUIRINDO","motivo":"EM_ANDAMENTO","duracao_ms":25,"amostras":1,"fechamento_confirmado":false}}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":1,"tempo_ms":0,"empuxo_kgf":19060}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":2,"tempo_ms":94,"empuxo_kgf":18958}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":3,"tempo_ms":188,"empuxo_kgf":19014}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":4,"tempo_ms":283,"empuxo_kgf":19029}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":5,"tempo_ms":377,"empuxo_kgf":19070}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":6,"tempo_ms":471,"empuxo_kgf":19111}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":7,"tempo_ms":565,"empuxo_kgf":19068}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":8,"tempo_ms":659,"empuxo_kgf":19054}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":9,"tempo_ms":753,"empuxo_kgf":19085}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":10,"tempo_ms":847,"empuxo_kgf":19074}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":11,"tempo_ms":941,"empuxo_kgf":19141}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":12,"tempo_ms":1035,"empuxo_kgf":19152}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":13,"tempo_ms":1130,"empuxo_kgf":19114}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":14,"tempo_ms":1224,"empuxo_kgf":19104}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":15,"tempo_ms":1318,"empuxo_kgf":19131}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":16,"tempo_ms":1412,"empuxo_kgf":19199}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":17,"tempo_ms":1506,"empuxo_kgf":19168}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":18,"tempo_ms":1600,"empuxo_kgf":19141}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":19,"tempo_ms":1694,"empuxo_kgf":19128}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":20,"tempo_ms":1788,"empuxo_kgf":19070}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":21,"tempo_ms":1883,"empuxo_kgf":19110}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":22,"tempo_ms":1977,"empuxo_kgf":19120}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":23,"tempo_ms":2071,"empuxo_kgf":19149}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":24,"tempo_ms":2165,"empuxo_kgf":19123}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":25,"tempo_ms":2259,"empuxo_kgf":19088}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":26,"tempo_ms":2353,"empuxo_kgf":19080}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":27,"tempo_ms":2447,"empuxo_kgf":19013}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":28,"tempo_ms":2541,"empuxo_kgf":19038}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":29,"tempo_ms":2635,"empuxo_kgf":19077}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"307EBCE0E5C7CE3F-1","indice":30,"tempo_ms":2730,"empuxo_kgf":19054}

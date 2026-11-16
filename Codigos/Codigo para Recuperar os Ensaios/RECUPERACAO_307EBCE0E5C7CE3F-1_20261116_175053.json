@@ -1,0 +1,618 @@
+{
+  "versao_ferramenta": "1.0",
+  "firmware": "0.17.1",
+  "sessao_recuperacao": "ABBB706544087FDE",
+  "ensaio": {
+    "ensaio_id": "307EBCE0E5C7CE3F-1",
+    "formato": 3,
+    "condicao": "concluido",
+    "em_uso": false,
+    "bytes": 7936,
+    "nome": "REPETIBILIDADE_01",
+    "amostras_disponiveis": 117,
+    "diagnostico": "FECHAMENTO_NORMAL",
+    "leitura_suportada": true,
+    "fechamento_confirmado": true,
+    "integridade_amostras": "verificada_por_bloco",
+    "duracao_observada_ms": 10918,
+    "duracao_ms": 10953,
+    "amostras_confirmadas_no_fim": 117,
+    "motivo": "COMANDO_FINALIZAR",
+    "data": "2026-11-16",
+    "observacoes": "",
+    "celula_id": "",
+    "perfil_id": "",
+    "coeficiente": 1,
+    "tara_interna": 6613066,
+    "unidade": "kgf"
+  },
+  "total_validado": 117,
+  "amostras": [
+    {
+      "indice": 1,
+      "tempo_ms": 0,
+      "valor_protocolar_nao_calibrado": 19060
+    },
+    {
+      "indice": 2,
+      "tempo_ms": 94,
+      "valor_protocolar_nao_calibrado": 18958
+    },
+    {
+      "indice": 3,
+      "tempo_ms": 188,
+      "valor_protocolar_nao_calibrado": 19014
+    },
+    {
+      "indice": 4,
+      "tempo_ms": 283,
+      "valor_protocolar_nao_calibrado": 19029
+    },
+    {
+      "indice": 5,
+      "tempo_ms": 377,
+      "valor_protocolar_nao_calibrado": 19070
+    },
+    {
+      "indice": 6,
+      "tempo_ms": 471,
+      "valor_protocolar_nao_calibrado": 19111
+    },
+    {
+      "indice": 7,
+      "tempo_ms": 565,
+      "valor_protocolar_nao_calibrado": 19068
+    },
+    {
+      "indice": 8,
+      "tempo_ms": 659,
+      "valor_protocolar_nao_calibrado": 19054
+    },
+    {
+      "indice": 9,
+      "tempo_ms": 753,
+      "valor_protocolar_nao_calibrado": 19085
+    },
+    {
+      "indice": 10,
+      "tempo_ms": 847,
+      "valor_protocolar_nao_calibrado": 19074
+    },
+    {
+      "indice": 11,
+      "tempo_ms": 941,
+      "valor_protocolar_nao_calibrado": 19141
+    },
+    {
+      "indice": 12,
+      "tempo_ms": 1035,
+      "valor_protocolar_nao_calibrado": 19152
+    },
+    {
+      "indice": 13,
+      "tempo_ms": 1130,
+      "valor_protocolar_nao_calibrado": 19114
+    },
+    {
+      "indice": 14,
+      "tempo_ms": 1224,
+      "valor_protocolar_nao_calibrado": 19104
+    },
+    {
+      "indice": 15,
+      "tempo_ms": 1318,
+      "valor_protocolar_nao_calibrado": 19131
+    },
+    {
+      "indice": 16,
+      "tempo_ms": 1412,
+      "valor_protocolar_nao_calibrado": 19199
+    },
+    {
+      "indice": 17,
+      "tempo_ms": 1506,
+      "valor_protocolar_nao_calibrado": 19168
+    },
+    {
+      "indice": 18,
+      "tempo_ms": 1600,
+      "valor_protocolar_nao_calibrado": 19141
+    },
+    {
+      "indice": 19,
+      "tempo_ms": 1694,
+      "valor_protocolar_nao_calibrado": 19128
+    },
+    {
+      "indice": 20,
+      "tempo_ms": 1788,
+      "valor_protocolar_nao_calibrado": 19070
+    },
+    {
+      "indice": 21,
+      "tempo_ms": 1883,
+      "valor_protocolar_nao_calibrado": 19110
+    },
+    {
+      "indice": 22,
+      "tempo_ms": 1977,
+      "valor_protocolar_nao_calibrado": 19120
+    },
+    {
+      "indice": 23,
+      "tempo_ms": 2071,
+      "valor_protocolar_nao_calibrado": 19149
+    },
+    {
+      "indice": 24,
+      "tempo_ms": 2165,
+      "valor_protocolar_nao_calibrado": 19123
+    },
+    {
+      "indice": 25,
+      "tempo_ms": 2259,
+      "valor_protocolar_nao_calibrado": 19088
+    },
+    {
+      "indice": 26,
+      "tempo_ms": 2353,
+      "valor_protocolar_nao_calibrado": 19080
+    },
+    {
+      "indice": 27,
+      "tempo_ms": 2447,
+      "valor_protocolar_nao_calibrado": 19013
+    },
+    {
+      "indice": 28,
+      "tempo_ms": 2541,
+      "valor_protocolar_nao_calibrado": 19038
+    },
+    {
+      "indice": 29,
+      "tempo_ms": 2635,
+      "valor_protocolar_nao_calibrado": 19077
+    },
+    {
+      "indice": 30,
+      "tempo_ms": 2730,
+      "valor_protocolar_nao_calibrado": 19054
+    },
+    {
+      "indice": 31,
+      "tempo_ms": 2824,
+      "valor_protocolar_nao_calibrado": 19039
+    },
+    {
+      "indice": 32,
+      "tempo_ms": 2918,
+      "valor_protocolar_nao_calibrado": 19026
+    },
+    {
+      "indice": 33,
+      "tempo_ms": 3012,
+      "valor_protocolar_nao_calibrado": 19008
+    },
+    {
+      "indice": 34,
+      "tempo_ms": 3106,
+      "valor_protocolar_nao_calibrado": 19020
+    },
+    {
+      "indice": 35,
+      "tempo_ms": 3200,
+      "valor_protocolar_nao_calibrado": 18998
+    },
+    {
+      "indice": 36,
+      "tempo_ms": 3294,
+      "valor_protocolar_nao_calibrado": 19000
+    },
+    {
+      "indice": 37,
+      "tempo_ms": 3388,
+      "valor_protocolar_nao_calibrado": 19050
+    },
+    {
+      "indice": 38,
+      "tempo_ms": 3483,
+      "valor_protocolar_nao_calibrado": 19048
+    },
+    {
+      "indice": 39,
+      "tempo_ms": 3577,
+      "valor_protocolar_nao_calibrado": 18977
+    },
+    {
+      "indice": 40,
+      "tempo_ms": 3671,
+      "valor_protocolar_nao_calibrado": 18893
+    },
+    {
+      "indice": 41,
+      "tempo_ms": 3765,
+      "valor_protocolar_nao_calibrado": 18879
+    },
+    {
+      "indice": 42,
+      "tempo_ms": 3859,
+      "valor_protocolar_nao_calibrado": 18941
+    },
+    {
+      "indice": 43,
+      "tempo_ms": 3953,
+      "valor_protocolar_nao_calibrado": 18937
+    },
+    {
+      "indice": 44,
+      "tempo_ms": 4047,
+      "valor_protocolar_nao_calibrado": 18915
+    },
+    {
+      "indice": 45,
+      "tempo_ms": 4141,
+      "valor_protocolar_nao_calibrado": 18961
+    },
+    {
+      "indice": 46,
+      "tempo_ms": 4235,
+      "valor_protocolar_nao_calibrado": 18954
+    },
+    {
+      "indice": 47,
+      "tempo_ms": 4330,
+      "valor_protocolar_nao_calibrado": 18948
+    },
+    {
+      "indice": 48,
+      "tempo_ms": 4424,
+      "valor_protocolar_nao_calibrado": 18968
+    },
+    {
+      "indice": 49,
+      "tempo_ms": 4518,
+      "valor_protocolar_nao_calibrado": 19022
+    },
+    {
+      "indice": 50,
+      "tempo_ms": 4612,
+      "valor_protocolar_nao_calibrado": 19030
+    },
+    {
+      "indice": 51,
+      "tempo_ms": 4706,
+      "valor_protocolar_nao_calibrado": 19003
+    },
+    {
+      "indice": 52,
+      "tempo_ms": 4800,
+      "valor_protocolar_nao_calibrado": 18991
+    },
+    {
+      "indice": 53,
+      "tempo_ms": 4894,
+      "valor_protocolar_nao_calibrado": 18943
+    },
+    {
+      "indice": 54,
+      "tempo_ms": 4988,
+      "valor_protocolar_nao_calibrado": 18948
+    },
+    {
+      "indice": 55,
+      "tempo_ms": 5083,
+      "valor_protocolar_nao_calibrado": 18934
+    },
+    {
+      "indice": 56,
+      "tempo_ms": 5177,
+      "valor_protocolar_nao_calibrado": 19007
+    },
+    {
+      "indice": 57,
+      "tempo_ms": 5271,
+      "valor_protocolar_nao_calibrado": 19048
+    },
+    {
+      "indice": 58,
+      "tempo_ms": 5365,
+      "valor_protocolar_nao_calibrado": 19041
+    },
+    {
+      "indice": 59,
+      "tempo_ms": 5459,
+      "valor_protocolar_nao_calibrado": 19007
+    },
+    {
+      "indice": 60,
+      "tempo_ms": 5553,
+      "valor_protocolar_nao_calibrado": 19011
+    },
+    {
+      "indice": 61,
+      "tempo_ms": 5647,
+      "valor_protocolar_nao_calibrado": 18973
+    },
+    {
+      "indice": 62,
+      "tempo_ms": 5741,
+      "valor_protocolar_nao_calibrado": 18922
+    },
+    {
+      "indice": 63,
+      "tempo_ms": 5835,
+      "valor_protocolar_nao_calibrado": 18973
+    },
+    {
+      "indice": 64,
+      "tempo_ms": 5930,
+      "valor_protocolar_nao_calibrado": 18982
+    },
+    {
+      "indice": 65,
+      "tempo_ms": 6024,
+      "valor_protocolar_nao_calibrado": 18900
+    },
+    {
+      "indice": 66,
+      "tempo_ms": 6118,
+      "valor_protocolar_nao_calibrado": 18893
+    },
+    {
+      "indice": 67,
+      "tempo_ms": 6212,
+      "valor_protocolar_nao_calibrado": 18962
+    },
+    {
+      "indice": 68,
+      "tempo_ms": 6306,
+      "valor_protocolar_nao_calibrado": 18924
+    },
+    {
+      "indice": 69,
+      "tempo_ms": 6400,
+      "valor_protocolar_nao_calibrado": 18906
+    },
+    {
+      "indice": 70,
+      "tempo_ms": 6494,
+      "valor_protocolar_nao_calibrado": 18923
+    },
+    {
+      "indice": 71,
+      "tempo_ms": 6588,
+      "valor_protocolar_nao_calibrado": 18894
+    },
+    {
+      "indice": 72,
+      "tempo_ms": 6683,
+      "valor_protocolar_nao_calibrado": 18966
+    },
+    {
+      "indice": 73,
+      "tempo_ms": 6777,
+      "valor_protocolar_nao_calibrado": 18990
+    },
+    {
+      "indice": 74,
+      "tempo_ms": 6871,
+      "valor_protocolar_nao_calibrado": 18980
+    },
+    {
+      "indice": 75,
+      "tempo_ms": 6965,
+      "valor_protocolar_nao_calibrado": 18981
+    },
+    {
+      "indice": 76,
+      "tempo_ms": 7059,
+      "valor_protocolar_nao_calibrado": 18948
+    },
+    {
+      "indice": 77,
+      "tempo_ms": 7153,
+      "valor_protocolar_nao_calibrado": 18844
+    },
+    {
+      "indice": 78,
+      "tempo_ms": 7247,
+      "valor_protocolar_nao_calibrado": 18896
+    },
+    {
+      "indice": 79,
+      "tempo_ms": 7341,
+      "valor_protocolar_nao_calibrado": 18988
+    },
+    {
+      "indice": 80,
+      "tempo_ms": 7435,
+      "valor_protocolar_nao_calibrado": 19034
+    },
+    {
+      "indice": 81,
+      "tempo_ms": 7530,
+      "valor_protocolar_nao_calibrado": 19036
+    },
+    {
+      "indice": 82,
+      "tempo_ms": 7624,
+      "valor_protocolar_nao_calibrado": 19009
+    },
+    {
+      "indice": 83,
+      "tempo_ms": 7718,
+      "valor_protocolar_nao_calibrado": 18951
+    },
+    {
+      "indice": 84,
+      "tempo_ms": 7812,
+      "valor_protocolar_nao_calibrado": 18941
+    },
+    {
+      "indice": 85,
+      "tempo_ms": 7906,
+      "valor_protocolar_nao_calibrado": 18931
+    },
+    {
+      "indice": 86,
+      "tempo_ms": 8000,
+      "valor_protocolar_nao_calibrado": 18867
+    },
+    {
+      "indice": 87,
+      "tempo_ms": 8094,
+      "valor_protocolar_nao_calibrado": 18908
+    },
+    {
+      "indice": 88,
+      "tempo_ms": 8188,
+      "valor_protocolar_nao_calibrado": 19007
+    },
+    {
+      "indice": 89,
+      "tempo_ms": 8283,
+      "valor_protocolar_nao_calibrado": 19021
+    },
+    {
+      "indice": 90,
+      "tempo_ms": 8377,
+      "valor_protocolar_nao_calibrado": 18943
+    },
+    {
+      "indice": 91,
+      "tempo_ms": 8471,
+      "valor_protocolar_nao_calibrado": 18903
+    },
+    {
+      "indice": 92,
+      "tempo_ms": 8565,
+      "valor_protocolar_nao_calibrado": 18950
+    },
+    {
+      "indice": 93,
+      "tempo_ms": 8659,
+      "valor_protocolar_nao_calibrado": 18936
+    },
+    {
+      "indice": 94,
+      "tempo_ms": 8753,
+      "valor_protocolar_nao_calibrado": 18945
+    },
+    {
+      "indice": 95,
+      "tempo_ms": 8847,
+      "valor_protocolar_nao_calibrado": 19008
+    },
+    {
+      "indice": 96,
+      "tempo_ms": 8941,
+      "valor_protocolar_nao_calibrado": 18993
+    },
+    {
+      "indice": 97,
+      "tempo_ms": 9035,
+      "valor_protocolar_nao_calibrado": 18909
+    },
+    {
+      "indice": 98,
+      "tempo_ms": 9130,
+      "valor_protocolar_nao_calibrado": 18944
+    },
+    {
+      "indice": 99,
+      "tempo_ms": 9224,
+      "valor_protocolar_nao_calibrado": 18975
+    },
+    {
+      "indice": 100,
+      "tempo_ms": 9318,
+      "valor_protocolar_nao_calibrado": 18954
+    },
+    {
+      "indice": 101,
+      "tempo_ms": 9412,
+      "valor_protocolar_nao_calibrado": 18966
+    },
+    {
+      "indice": 102,
+      "tempo_ms": 9506,
+      "valor_protocolar_nao_calibrado": 18960
+    },
+    {
+      "indice": 103,
+      "tempo_ms": 9600,
+      "valor_protocolar_nao_calibrado": 19011
+    },
+    {
+      "indice": 104,
+      "tempo_ms": 9694,
+      "valor_protocolar_nao_calibrado": 19015
+    },
+    {
+      "indice": 105,
+      "tempo_ms": 9788,
+      "valor_protocolar_nao_calibrado": 19006
+    },
+    {
+      "indice": 106,
+      "tempo_ms": 9883,
+      "valor_protocolar_nao_calibrado": 18976
+    },
+    {
+      "indice": 107,
+      "tempo_ms": 9977,
+      "valor_protocolar_nao_calibrado": 19001
+    },
+    {
+      "indice": 108,
+      "tempo_ms": 10071,
+      "valor_protocolar_nao_calibrado": 18985
+    },
+    {
+      "indice": 109,
+      "tempo_ms": 10165,
+      "valor_protocolar_nao_calibrado": 18957
+    },
+    {
+      "indice": 110,
+      "tempo_ms": 10259,
+      "valor_protocolar_nao_calibrado": 18917
+    },
+    {
+      "indice": 111,
+      "tempo_ms": 10353,
+      "valor_protocolar_nao_calibrado": 18988
+    },
+    {
+      "indice": 112,
+      "tempo_ms": 10447,
+      "valor_protocolar_nao_calibrado": 18960
+    },
+    {
+      "indice": 113,
+      "tempo_ms": 10541,
+      "valor_protocolar_nao_calibrado": 18947
+    },
+    {
+      "indice": 114,
+      "tempo_ms": 10635,
+      "valor_protocolar_nao_calibrado": 18966
+    },
+    {
+      "indice": 115,
+      "tempo_ms": 10730,
+      "valor_protocolar_nao_calibrado": 18945
+    },
+    {
+      "indice": 116,
+      "tempo_ms": 10824,
+      "valor_protocolar_nao_calibrado": 18918
+    },
+    {
+      "indice": 117,
+      "tempo_ms": 10918,
+      "valor_protocolar_nao_calibrado": 18916
+    }
+  ],
+  "nota": "CRC foi verificado e reportado pelo firmware; coeficiente 1 não calibra kgf."
+}
