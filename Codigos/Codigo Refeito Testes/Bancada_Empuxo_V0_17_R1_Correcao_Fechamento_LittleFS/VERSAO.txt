@@ -1,0 +1,12 @@
+Firmware: 0.17.1 (R1 - fechamento LittleFS)
+Base: 0.17 oficial (Checkpoint 06)
+Mudanca localizada: flush() antes da verificacao de tamanho no encerramento.
+Protocolos USB v2, LoRa BT/1 e gravacao formato 3 inalterados.
+Referencia anterior: 0.17
+Base: 0.16 (Bancada_Empuxo_V0_16_Multiplos_Ensaios.zip)
+Etapa: transferencia completa de ensaio salvo via LoRa
+USB: 115200 baud, protocolo JSON por linha 2
+Amostra USB e LoRa ao vivo: formato 2, kgf
+Arquivo LittleFS: formato 3, preservado da V0.16
+Transporte LoRa gravado: BT/1 (binario, ACK e confirmacao final)
+Somente ESP da bancada; sem interface Python, sem receptor, sem historico.

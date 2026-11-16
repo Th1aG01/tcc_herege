@@ -1,0 +1,41 @@
+TCC BRAVO - Diagnostico JEDEC no caminho do LoRa (CS GPIO21)
+Versao 1.0 - 2026-11-16
+
+OBJETIVO
+Verificar a Flash W25Q16 utilizando o mesmo CS GPIO21 e, se possivel,
+os mesmos fios do barramento usados no teste positivo do LoRa (10 leituras 0x12).
+Este teste NAO muda a pinagem definitiva da V0.18.
+
+PREPARACAO - SEMPRE COM ESP32 TOTALMENTE DESLIGADO
+- Deixar a ignicao fisicamente desabilitada/desconectada.
+- Desconectar o LoRa por completo (inclusive alimentacao).
+- Desconectar do ESP32 a Flash e depois reconecta-la ao caminho comprovado
+  do LoRa: CS da Flash -> GPIO21; CLK -> GPIO18; DO/MISO -> GPIO19;
+  DI/MOSI -> GPIO23.
+- Alimentacao da Flash: VCC -> 3V3 e GND -> GND.
+- WP e HOLD do modulo Flash -> 3V3, sem deixar pontas soltas.
+- Se possivel, reaproveitar exatamente os quatro jumpers de sinal
+  do teste de LoRa que passou. Confira os nomes impressos na placa.
+- Nao conectar nenhum pino de sinal a 5V ou GND.
+- Verificar visualmente ausencia de curto antes de energizar.
+
+EXECUCAO
+1. Abra Diagnostico_JEDEC_Flash_CS21_V018.ino na Arduino IDE.
+2. Selecione a mesma placa ESP32 e porta ja usadas nos testes anteriores.
+3. Faca upload e abra o Monitor Serial em 115200 baud.
+4. Confirme a mensagem: FLASH JEDEC CS GPIO21 - SOMENTE LEITURA.
+5. Copie as dez leituras: cinco em 100 kHz e cinco em 1 MHz.
+
+INTERPRETACAO
+- EF 40 15 em todas: a Flash responde nesse caminho; investigar as diferencas
+  entre a montagem original e esta configuracao. Nao muda V0.18 automaticamente.
+- FF FF FF, 00 00 00 ou valores variaveis: Flash ou caminho exclusivo
+  ate ela ainda nao responde; sem multimetro nao se distingue defeito
+  no modulo de falta de alimentacao/contato/seleção/HOLD.
+- Esta verificacao nao prova integridade de escrita, armazenamento ou capacidade.
+
+SEGURANCA E LIMITACOES
+Nenhuma escrita, apagamento ou formatacao da Flash. Nao aciona ignicao.
+Nao comunica ou transmite pelo radio. Nenhum teste fisico ou compilacao
+foi realizado pelo assistente. Depois do teste, desligar e restaurar
+CS da Flash ao GPIO13 para o projeto original, sem ligar antes de revisar.

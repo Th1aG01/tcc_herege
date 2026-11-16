@@ -1,0 +1,46 @@
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":true,"fase":"aceito","estado":"PREPARANDO","lora_ao_vivo":false,"ensaio":{"id":"1234567A12345679-1","solicitacao_id":1,"coeficiente":1,"iniciado":false,"resultado":"PREPARANDO","motivo":"AGUARDANDO_AMOSTRA","duracao_ms":0,"amostras":0,"fechamento_confirmado":false},"calibracao":{"unidade":"kgf","coeficiente":1,"configurada":true,"valida":true,"origem":"comando_usb","validacao_fisica":"responsabilidade_do_operador","pronta_para_uso":true},"tara":{"pronta":true,"em_andamento":false,"leituras":10,"necessarias":10,"timeout_ms":3000}}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","codigo":"ESTADO_ATUALIZADO","descricao":"Operacao iniciada; conclusao sera informada por evento.","estado":"PREPARANDO"}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":100,"id":1,"codigo":"AQUISICAO_INICIADA","fase":"iniciado","estado":"ADQUIRINDO","descricao":"Primeira amostra calibrada gravada; aquisicao em andamento.","ensaio":{"id":"1234567A12345679-1","solicitacao_id":1,"coeficiente":1,"iniciado":true,"resultado":"ADQUIRINDO","motivo":"EM_ANDAMENTO","duracao_ms":0,"amostras":1,"fechamento_confirmado":false}}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":1,"tempo_ms":0,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":2,"tempo_ms":10,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":3,"tempo_ms":20,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":4,"tempo_ms":30,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":5,"tempo_ms":40,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":6,"tempo_ms":50,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":7,"tempo_ms":60,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":8,"tempo_ms":70,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":9,"tempo_ms":80,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":10,"tempo_ms":90,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":11,"tempo_ms":100,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":12,"tempo_ms":110,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":13,"tempo_ms":120,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":14,"tempo_ms":130,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":15,"tempo_ms":140,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":16,"tempo_ms":150,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":17,"tempo_ms":160,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":18,"tempo_ms":170,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":19,"tempo_ms":180,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":20,"tempo_ms":190,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":21,"tempo_ms":200,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":22,"tempo_ms":210,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":23,"tempo_ms":220,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":24,"tempo_ms":230,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":25,"tempo_ms":240,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":26,"tempo_ms":250,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":27,"tempo_ms":260,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":28,"tempo_ms":270,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":29,"tempo_ms":280,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":30,"tempo_ms":290,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":31,"tempo_ms":300,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":32,"tempo_ms":310,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":33,"tempo_ms":320,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":34,"tempo_ms":330,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":35,"tempo_ms":340,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":36,"tempo_ms":350,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":37,"tempo_ms":360,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"amostra","ensaio_id":"1234567A12345679-1","indice":38,"tempo_ms":370,"empuxo_kgf":1500}
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":5100,"id":0,"comando":"IDENTIFICAR","ok":true,"fase":"concluido","dispositivo":"ESP32-AABBCCDDEEFF","modelo":"Bancada_Empuxo_ESP32","firmware":"0.18","baud":115200,"formato_amostra":2,"formato_gravacao":3,"protocolo_lora_gravado":1,"maior_id":1,"rx_max_bytes":512,"rx_timeout_ms":1000,"respostas_retidas":8}
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":5100,"id":2,"comando":"STATUS","ok":true,"fase":"concluido","dispositivo":"ESP32-AABBCCDDEEFF","firmware":"0.18","estado":"ADQUIRINDO","aquisicao":{"ativa":true,"preparando":false,"id":1,"amostras":501},"ensaio":{"id":"1234567A12345679-1","solicitacao_id":1,"coeficiente":1,"iniciado":true,"resultado":"ADQUIRINDO","motivo":"EM_ANDAMENTO","duracao_ms":5000,"amostras":501,"fechamento_confirmado":false},"sensor":{"respondendo":true,"tara_pronta":true,"tara_em_andamento":false},"calibracao":{"unidade":"kgf","coeficiente":1,"configurada":true,"valida":true,"origem":"comando_usb","validacao_fisica":"responsabilidade_do_operador","pronta_para_uso":true},"tara":{"pronta":true,"em_andamento":false,"leituras":10,"necessarias":10,"timeout_ms":3000},"armazenamento":{"pronto":true,"tipo":"LittleFS_externo","diagnostico":"OK","jedec":15679509,"escrita":true,"catalogo_revisao":2,"multiplos_ensaios":true,"formato":3},"radio":{"pronto":true,"tx":false,"ao_vivo":false,"envio_gravado":false,"id_envio":0,"enviadas":0,"total":0,"transferencia_id":"","estado_transferencia":"NENHUMA","recebimento_confirmado":false},"usb":{"amostras_descartadas":463,"mensagens_descartadas":0,"maior_id":2},"catalogo":{"ocupado":false,"solicitacao_id":0,"operacao":"NENHUMA","excluidos":0,"protegidos":0,"falhas":0}}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":5100,"id":1,"causado_por":3,"codigo":"ENSAIO_ENCERRADO","fase":"concluido","descricao":"COMANDO_FINALIZAR","estado":"OCIOSO","ensaio":{"id":"1234567A12345679-1","solicitacao_id":1,"coeficiente":1,"iniciado":true,"resultado":"CONCLUIDO","motivo":"COMANDO_FINALIZAR","duracao_ms":5000,"amostras":501,"fechamento_confirmado":true},"amostras_gravadas":501,"amostras_enviadas":0,"calibracao":{"unidade":"kgf","coeficiente":1,"configurada":true,"valida":true,"origem":"comando_usb","validacao_fisica":"responsabilidade_do_operador","pronta_para_uso":true},"tara":{"pronta":true,"em_andamento":false,"leituras":10,"necessarias":10,"timeout_ms":3000}}
+{"protocolo":2,"tipo":"resposta","sessao":"1234567A12345679","ms":5100,"id":3,"comando":"FINALIZAR","ok":true,"fase":"concluido","estado":"OCIOSO","lora_ao_vivo":false,"ensaio":{"id":"1234567A12345679-1","solicitacao_id":1,"coeficiente":1,"iniciado":true,"resultado":"CONCLUIDO","motivo":"COMANDO_FINALIZAR","duracao_ms":5000,"amostras":501,"fechamento_confirmado":true},"calibracao":{"unidade":"kgf","coeficiente":1,"configurada":true,"valida":true,"origem":"comando_usb","validacao_fisica":"responsabilidade_do_operador","pronta_para_uso":true},"tara":{"pronta":true,"em_andamento":false,"leituras":10,"necessarias":10,"timeout_ms":3000}}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":5100,"id":3,"comando":"FINALIZAR","codigo":"ESTADO_ATUALIZADO","descricao":"Comando concluido.","estado":"OCIOSO"}

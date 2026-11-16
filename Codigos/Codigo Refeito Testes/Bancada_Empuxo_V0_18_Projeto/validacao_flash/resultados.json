@@ -1,0 +1,382 @@
+[
+  {
+    "cenario": "jedec_ausente",
+    "exit_code": 0,
+    "saida": "PASS jedec_ausente programs=0 erases=0 transactions=2"
+  },
+  {
+    "cenario": "jedec_incorreto",
+    "exit_code": 0,
+    "saida": "PASS jedec_incorreto programs=0 erases=0 transactions=2"
+  },
+  {
+    "cenario": "busy",
+    "exit_code": 0,
+    "saida": "PASS busy programs=0 erases=0 transactions=602"
+  },
+  {
+    "cenario": "boot_vazio",
+    "exit_code": 0,
+    "saida": "PASS boot_vazio programs=0 erases=0 transactions=11"
+  },
+  {
+    "cenario": "boot_desconhecido",
+    "exit_code": 0,
+    "saida": "PASS boot_desconhecido programs=0 erases=0 transactions=9"
+  },
+  {
+    "cenario": "provisionamento_protegido",
+    "exit_code": 0,
+    "saida": "PASS provisionamento_protegido programs=0 erases=0 transactions=11722"
+  },
+  {
+    "cenario": "driver_paginas",
+    "exit_code": 0,
+    "saida": "PASS driver_paginas programs=4 erases=1 transactions=93"
+  },
+  {
+    "cenario": "driver_programa_falha",
+    "exit_code": 0,
+    "saida": "PASS driver_programa_falha programs=1 erases=0 transactions=13"
+  },
+  {
+    "cenario": "driver_erase_falha",
+    "exit_code": 0,
+    "saida": "PASS driver_erase_falha programs=0 erases=1 transactions=11"
+  },
+  {
+    "cenario": "driver_wel",
+    "exit_code": 0,
+    "saida": "PASS driver_wel programs=0 erases=0 transactions=9"
+  },
+  {
+    "cenario": "driver_protegido",
+    "exit_code": 0,
+    "saida": "PASS driver_protegido programs=0 erases=0 transactions=4"
+  },
+  {
+    "cenario": "driver_limites",
+    "exit_code": 0,
+    "saida": "PASS driver_limites programs=0 erases=0 transactions=2"
+  },
+  {
+    "cenario": "driver_flush",
+    "exit_code": 0,
+    "saida": "PASS driver_flush programs=0 erases=0 transactions=602"
+  },
+  {
+    "cenario": "somente_leitura",
+    "exit_code": 0,
+    "saida": "PASS somente_leitura programs=4 erases=3 transactions=16744"
+  },
+  {
+    "cenario": "persistencia_gravar",
+    "exit_code": 0,
+    "saida": "PASS persistencia_gravar programs=38 erases=10 transactions=18464"
+  },
+  {
+    "cenario": "persistencia_ler",
+    "exit_code": 0,
+    "saida": "PASS persistencia_ler programs=0 erases=0 transactions=1433"
+  },
+  {
+    "cenario": "multiplos_crc_exclusao",
+    "exit_code": 0,
+    "saida": "PASS multiplos_crc_exclusao programs=30 erases=9 transactions=19458"
+  },
+  {
+    "cenario": "lora_spi",
+    "exit_code": 0,
+    "saida": "PASS lora_spi programs=13 erases=5 transactions=19763"
+  },
+  {
+    "cenario": "usb_ausente",
+    "exit_code": 0,
+    "saida": "PASS usb_ausente programs=260 erases=31 transactions=23104"
+  },
+  {
+    "cenario": "flush_falha",
+    "exit_code": 0,
+    "saida": "PASS flush_falha programs=19 erases=7 transactions=18091"
+  },
+  {
+    "cenario": "capacidade_cheia",
+    "exit_code": 0,
+    "saida": "PASS capacidade_cheia programs=12833 erases=1046 transactions=278226"
+  },
+  {
+    "cenario": "colisao",
+    "exit_code": 0,
+    "saida": "PASS colisao programs=13 erases=5 transactions=17596"
+  },
+  {
+    "cenario": "corrupcao_amostra",
+    "exit_code": 0,
+    "saida": "PASS corrupcao_amostra programs=13 erases=5 transactions=17680"
+  },
+  {
+    "cenario": "recuperar_superbloco",
+    "exit_code": 0,
+    "saida": "PASS recuperar_superbloco programs=13 erases=5 transactions=17538"
+  },
+  {
+    "cenario": "corte_preparar",
+    "exit_code": 0,
+    "saida": "PASS corte_preparar programs=20 erases=7 transactions=17794"
+  },
+  {
+    "cenario": "corte_escrever_1",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=1 erases=0 transactions=284"
+  },
+  {
+    "cenario": "corte_ler_1",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_2",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=1 erases=1 transactions=388"
+  },
+  {
+    "cenario": "corte_ler_2",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_3",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=2 erases=1 transactions=429"
+  },
+  {
+    "cenario": "corte_ler_3",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_4",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=3 erases=1 transactions=442"
+  },
+  {
+    "cenario": "corte_ler_4",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_5",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=4 erases=1 transactions=455"
+  },
+  {
+    "cenario": "corte_ler_5",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_6",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=5 erases=1 transactions=468"
+  },
+  {
+    "cenario": "corte_ler_6",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_7",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=6 erases=1 transactions=481"
+  },
+  {
+    "cenario": "corte_ler_7",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_8",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=7 erases=1 transactions=494"
+  },
+  {
+    "cenario": "corte_ler_8",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_9",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=8 erases=1 transactions=507"
+  },
+  {
+    "cenario": "corte_ler_9",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_10",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=9 erases=1 transactions=520"
+  },
+  {
+    "cenario": "corte_ler_10",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_11",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=10 erases=1 transactions=533"
+  },
+  {
+    "cenario": "corte_ler_11",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_12",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=11 erases=1 transactions=546"
+  },
+  {
+    "cenario": "corte_ler_12",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_13",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=12 erases=1 transactions=559"
+  },
+  {
+    "cenario": "corte_ler_13",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_14",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=13 erases=1 transactions=572"
+  },
+  {
+    "cenario": "corte_ler_14",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_15",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=14 erases=1 transactions=585"
+  },
+  {
+    "cenario": "corte_ler_15",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_16",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=15 erases=1 transactions=598"
+  },
+  {
+    "cenario": "corte_ler_16",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_17",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=16 erases=1 transactions=611"
+  },
+  {
+    "cenario": "corte_ler_17",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_18",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=17 erases=1 transactions=624"
+  },
+  {
+    "cenario": "corte_ler_18",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_19",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=17 erases=2 transactions=635"
+  },
+  {
+    "cenario": "corte_ler_19",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_20",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=18 erases=2 transactions=676"
+  },
+  {
+    "cenario": "corte_ler_20",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_21",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=19 erases=2 transactions=689"
+  },
+  {
+    "cenario": "corte_ler_21",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_22",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=20 erases=2 transactions=702"
+  },
+  {
+    "cenario": "corte_ler_22",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_23",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=21 erases=2 transactions=715"
+  },
+  {
+    "cenario": "corte_ler_23",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "corte_escrever_24",
+    "exit_code": 0,
+    "saida": "PASS corte_escrever programs=22 erases=2 transactions=728"
+  },
+  {
+    "cenario": "corte_ler_24",
+    "exit_code": 0,
+    "saida": "PASS corte_ler programs=0 erases=0 transactions=695"
+  },
+  {
+    "cenario": "diagnostico",
+    "exit_code": 0,
+    "saida": "PASS diagnostico"
+  },
+  {
+    "cenario": "vazio",
+    "exit_code": 0,
+    "saida": "PASS vazio"
+  },
+  {
+    "cenario": "conteudo",
+    "exit_code": 0,
+    "saida": "PASS conteudo"
+  }
+]

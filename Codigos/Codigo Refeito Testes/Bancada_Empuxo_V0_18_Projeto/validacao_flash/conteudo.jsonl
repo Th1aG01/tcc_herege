@@ -1,0 +1,10 @@
+JEDEC: EF4015; OK
+Boot somente leitura. Ignicao deve estar fisicamente desabilitada.
+Apenas para chip autorizado e integralmente vazio (2 MiB = FF).
+Para autorizar criacao do LittleFS externo, enviar exatamente:
+AUTORIZO_INICIALIZAR_FLASH_VAZIA_EF4015
+Qualquer byte diferente de FF recusa a operacao; nao existe comando para forcar.
+Nenhuma operacao autorizada.
+Nenhuma operacao autorizada.
+Resultado: RECUSADO_OU_FALHOU; driver=OK; erro_fs=-17
+Nao repetir a inicializacao. Reiniciar com firmware principal para validar.

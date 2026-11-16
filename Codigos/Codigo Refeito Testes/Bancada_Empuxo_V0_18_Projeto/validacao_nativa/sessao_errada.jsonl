@@ -1,0 +1,2 @@
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":1,"comando":"INICIAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"SESSAO_INVALIDA","origem":"USB","descricao":"Consulte IDENTIFICAR com id 0 e use a sessao atual."}
+{"protocolo":2,"tipo":"erro","sessao":"1234567A12345679","ms":0,"id":2,"comando":"INICIAR","ok":false,"fase":"rejeitado","nivel":"ERRO","codigo":"SESSAO_INVALIDA","origem":"USB","descricao":"Consulte IDENTIFICAR com id 0 e use a sessao atual."}

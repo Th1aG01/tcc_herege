@@ -1,0 +1,36 @@
+TCC BRAVO - Diagnostico SPI CS temporario GPIO27 (V0.18)
+
+FINALIDADE: isolar uma possivel falha do GPIO13 ou do contato eletrico de CS.
+NAO EH UMA MUDANCA DE PINAGEM DEFINITIVA.
+
+ANTES DE LIGAR O ESP32 AO USB:
+1. Desligue o ESP32 e qualquer fonte externa.
+2. Remova o jumper de loopback GPIO13--GPIO19 e qualquer jumper solto em GPIO13.
+3. Mantenha o modulo LoRa COMPLETAMENTE desconectado.
+4. Reconecte a Flash com as ligacoes originais, EXCETO seu CS:
+   VCC=3V3; GND=GND; SCK=GPIO18; DI/MOSI=GPIO23; DO/MISO=GPIO19;
+   WP=3V3; HOLD=3V3; CS=GPIO27 TEMPORARIAMENTE.
+5. Verifique com cuidado a identificacao de GPIO27 no ESP32 DevKit V1
+   antes de energizar; confirme que nao ha outro componente nele.
+6. Mantenha a ignicao FISICAMENTE desconectada.
+7. Carregue Diagnostico_JEDEC_CS_GPIO27_V018.ino (Monitor Serial 115200).
+8. Pressione EN 3 vezes e anote os resultados A e B/C/D/E.
+
+INTERPRETACAO:
+- EF4015 repetido: CS original no GPIO13/contato/conexao deve ser investigado.
+- FFFFFF/000000 persistentes: ainda podem existir outros problemas fisicos,
+  alimentacao, cabos, Flash ou sinais SPI; o teste nao determina a causa sozinho.
+
+ALTERACAO DO CODIGO DE BASE:
+- FLASH_CS_PIN = 13 -> 27 (somente neste sketch diagnostico);
+- comentarios e banner para identificar o teste.
+- operacoes e configuracoes SPI de leitura JEDEC mantidas.
+
+SEGURANCA:
+O sketch transmite apenas o comando 0x9F (JEDEC) e bytes dummy.
+Nenhum comando de escrita, apagamento ou formatacao e enviado.
+Nao utilize ferramentas PrepararFlashVazia ou qualquer funcao de escrita.
+
+VALIDACAO:
+Arquivo e ZIP verificados por inspecao; NAO compilado nesta sessao,
+NAO executado em hardware. V0.18 original intocada.

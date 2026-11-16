@@ -1,0 +1,31 @@
+TCC BRAVO - Teste de comunicacao SPI com o modulo LoRa (diagnostico isolado)
+
+OBJETIVO
+Verificar se o mesmo barramento SPI que nao consegue ler a Flash responde a
+um segundo periferico real. Isso nao identifica, por si so, o defeito da Flash.
+
+SEGURANCA
+- Desligar completamente o ESP32 antes de conectar ou desconectar modulos.
+- Ignicao deve estar fisicamente desabilitada.
+- DESLIGAR e desconectar completamente a Flash externa (inclusive alimentacao).
+- Conectar SOMENTE o LoRa: 3V3, GND, CS=21, SCK=18, MISO=19, MOSI=23, RST=14.
+- DIO0 nao e necessario para este diagnostico.
+- Nao utilizar alimentacao de 5 V no modulo de radio de 3,3 V.
+
+EXECUCAO
+Abrir Diagnostico_LoRa_SPI_Leitura_V018.ino na Arduino IDE, carregar para
+ESP32 DevKit V1 e abrir Monitor Serial em 115200 baud. Pressionar EN.
+
+O QUE ESPERAR
+Em modulos compativeis com SX1276/77/78/79, a leitura do registrador de
+versao 0x42 normalmente retorna 0x12 em todas as 10 leituras.
+Um retorno diferente nao prova defeito, pois depende do chipset real e da
+montagem. FF ou 00 constantes sugerem falha de comunicacao com o radio.
+
+LIMITACOES
+Teste apenas de leitura de um registrador do LoRa. Nenhuma transferencia
+LoRa e realizada. Nao acessa a Flash externa. Nao altera a V0.18.
+Nao substitui medicao eletrica com multimetro/osciloscopio.
+
+VALIDACAO
+Arquivo criado em 2026-11-16. Sem compilacao ou teste fisico nesta entrega.

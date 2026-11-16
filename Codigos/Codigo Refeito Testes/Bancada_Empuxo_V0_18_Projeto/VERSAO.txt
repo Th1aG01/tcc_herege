@@ -1,0 +1,8 @@
+Bancada de Empuxo V0.18 — Flash SPI externa
+Data: 2026-11-16 (America/Sao_Paulo)
+Base: V0.17, ZIP SHA256 8e3f904c3f3a25881d212b8fa7d5f427617c3544565aab7e0bd9b561b71b5f57
+USB JSON: protocolo 2; armazenamento: formato 3; LoRa: BT/1.
+Backend: LittleFS 2.11.3 sobre NOR SPI EF4015, CS13, 2097152 bytes.
+Entrega: somente leitura por padrao, sem formatacao automatica.
+Estado: IMPLEMENTADO / VALIDADO EM SOFTWARE NATIVO.
+Compilacao ESP32: BLOQUEADA (core ausente). Validacao fisica V0.18: PENDENTE.

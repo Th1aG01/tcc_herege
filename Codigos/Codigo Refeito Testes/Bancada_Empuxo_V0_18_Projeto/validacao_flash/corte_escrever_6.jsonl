@@ -1,0 +1,3 @@
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":0,"id":null,"codigo":"BOOT","descricao":"Bancada V0.18 iniciando.","estado":"OCIOSO"}
+{"protocolo":2,"tipo":"aviso","sessao":"1234567A12345679","ms":0,"id":null,"nivel":"AVISO","origem":"ESP32","codigo":"COEFICIENTE_PADRAO","descricao":"Valor inicial 1.0 nao configurado; ensaio bloqueado ate CONFIGURAR_CALIBRACAO e TARA."}
+{"protocolo":2,"tipo":"evento","sessao":"1234567A12345679","ms":0,"id":null,"codigo":"USB_PRONTA","descricao":"Use IDENTIFICAR com id 0; tara inicial em andamento.","estado":"TARANDO"}

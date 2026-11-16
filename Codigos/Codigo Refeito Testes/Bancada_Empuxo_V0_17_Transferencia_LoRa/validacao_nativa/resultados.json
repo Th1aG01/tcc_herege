@@ -1,0 +1,707 @@
+[
+  {
+    "cenario": "identidade",
+    "exit_code": 0,
+    "saida": "PASS identidade"
+  },
+  {
+    "cenario": "fragmentos",
+    "exit_code": 0,
+    "saida": "PASS fragmentos"
+  },
+  {
+    "cenario": "antigos",
+    "exit_code": 0,
+    "saida": "PASS antigos"
+  },
+  {
+    "cenario": "malformados",
+    "exit_code": 0,
+    "saida": "PASS malformados"
+  },
+  {
+    "cenario": "lixo_apos_json",
+    "exit_code": 0,
+    "saida": "PASS lixo_apos_json"
+  },
+  {
+    "cenario": "duplicadas",
+    "exit_code": 0,
+    "saida": "PASS duplicadas"
+  },
+  {
+    "cenario": "timeout_rx",
+    "exit_code": 0,
+    "saida": "PASS timeout_rx"
+  },
+  {
+    "cenario": "limite_rx",
+    "exit_code": 0,
+    "saida": "PASS limite_rx"
+  },
+  {
+    "cenario": "nul_controle",
+    "exit_code": 0,
+    "saida": "PASS nul_controle"
+  },
+  {
+    "cenario": "crlf_burst",
+    "exit_code": 0,
+    "saida": "PASS crlf_burst"
+  },
+  {
+    "cenario": "sessao_errada",
+    "exit_code": 0,
+    "saida": "PASS sessao_errada"
+  },
+  {
+    "cenario": "esquema",
+    "exit_code": 0,
+    "saida": "PASS esquema"
+  },
+  {
+    "cenario": "dedup_inicio",
+    "exit_code": 0,
+    "saida": "PASS dedup_inicio"
+  },
+  {
+    "cenario": "conflito",
+    "exit_code": 0,
+    "saida": "PASS conflito"
+  },
+  {
+    "cenario": "expirado",
+    "exit_code": 0,
+    "saida": "PASS expirado"
+  },
+  {
+    "cenario": "pendente_retido",
+    "exit_code": 0,
+    "saida": "PASS pendente_retido"
+  },
+  {
+    "cenario": "dedup_alternar",
+    "exit_code": 0,
+    "saida": "PASS dedup_alternar"
+  },
+  {
+    "cenario": "dedup_erro",
+    "exit_code": 0,
+    "saida": "PASS dedup_erro"
+  },
+  {
+    "cenario": "status_snapshot",
+    "exit_code": 0,
+    "saida": "PASS status_snapshot"
+  },
+  {
+    "cenario": "envio_conclusao",
+    "exit_code": 0,
+    "saida": "PASS envio_conclusao"
+  },
+  {
+    "cenario": "cancelamento",
+    "exit_code": 0,
+    "saida": "PASS cancelamento"
+  },
+  {
+    "cenario": "falha_envio",
+    "exit_code": 0,
+    "saida": "PASS falha_envio"
+  },
+  {
+    "cenario": "timeout_radio",
+    "exit_code": 0,
+    "saida": "PASS timeout_radio"
+  },
+  {
+    "cenario": "falha_sensor",
+    "exit_code": 0,
+    "saida": "PASS falha_sensor"
+  },
+  {
+    "cenario": "falha_flash",
+    "exit_code": 0,
+    "saida": "PASS falha_flash"
+  },
+  {
+    "cenario": "sem_lora",
+    "exit_code": 0,
+    "saida": "PASS sem_lora"
+  },
+  {
+    "cenario": "sem_flash",
+    "exit_code": 0,
+    "saida": "PASS sem_flash"
+  },
+  {
+    "cenario": "sem_hx",
+    "exit_code": 0,
+    "saida": "PASS sem_hx"
+  },
+  {
+    "cenario": "boot_responsivo",
+    "exit_code": 0,
+    "saida": "PASS boot_responsivo"
+  },
+  {
+    "cenario": "backpressure",
+    "exit_code": 0,
+    "saida": "PASS backpressure"
+  },
+  {
+    "cenario": "controle_congestionado",
+    "exit_code": 0,
+    "saida": "PASS controle_congestionado"
+  },
+  {
+    "cenario": "amostra",
+    "exit_code": 0,
+    "saida": "PASS amostra"
+  },
+  {
+    "cenario": "configuracao",
+    "exit_code": 0,
+    "saida": "PASS configuracao"
+  },
+  {
+    "cenario": "permutacao",
+    "exit_code": 0,
+    "saida": "PASS permutacao"
+  },
+  {
+    "cenario": "fuzz",
+    "exit_code": 0,
+    "saida": "PASS fuzz"
+  },
+  {
+    "cenario": "cal_padrao",
+    "exit_code": 0,
+    "saida": "PASS cal_padrao"
+  },
+  {
+    "cenario": "cal_configurar",
+    "exit_code": 0,
+    "saida": "PASS cal_configurar"
+  },
+  {
+    "cenario": "cal_um_explicito",
+    "exit_code": 0,
+    "saida": "PASS cal_um_explicito"
+  },
+  {
+    "cenario": "cal_sinais_formula",
+    "exit_code": 0,
+    "saida": "PASS cal_sinais_formula"
+  },
+  {
+    "cenario": "cal_invalidos",
+    "exit_code": 0,
+    "saida": "PASS cal_invalidos"
+  },
+  {
+    "cenario": "cal_extremos_finitos",
+    "exit_code": 0,
+    "saida": "PASS cal_extremos_finitos"
+  },
+  {
+    "cenario": "cal_offset_unidade",
+    "exit_code": 0,
+    "saida": "PASS cal_offset_unidade"
+  },
+  {
+    "cenario": "cal_dedup_parametro",
+    "exit_code": 0,
+    "saida": "PASS cal_dedup_parametro"
+  },
+  {
+    "cenario": "cal_bloqueio_aquisicao",
+    "exit_code": 0,
+    "saida": "PASS cal_bloqueio_aquisicao"
+  },
+  {
+    "cenario": "cal_tara_assincrona",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_assincrona"
+  },
+  {
+    "cenario": "cal_tara_repetida",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_repetida"
+  },
+  {
+    "cenario": "cal_tara_sem_duplo_zero",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_sem_duplo_zero"
+  },
+  {
+    "cenario": "cal_tara_ausente",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_ausente"
+  },
+  {
+    "cenario": "cal_tara_parcial",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_parcial"
+  },
+  {
+    "cenario": "cal_tara_bloqueia_config",
+    "exit_code": 0,
+    "saida": "PASS cal_tara_bloqueia_config"
+  },
+  {
+    "cenario": "cal_recuperar_sensor",
+    "exit_code": 0,
+    "saida": "PASS cal_recuperar_sensor"
+  },
+  {
+    "cenario": "cal_envio_tara",
+    "exit_code": 0,
+    "saida": "PASS cal_envio_tara"
+  },
+  {
+    "cenario": "cal_fragmentos",
+    "exit_code": 0,
+    "saida": "PASS cal_fragmentos"
+  },
+  {
+    "cenario": "cal_boot_ausente",
+    "exit_code": 0,
+    "saida": "PASS cal_boot_ausente"
+  },
+  {
+    "cenario": "cal_status_tamanho",
+    "exit_code": 0,
+    "saida": "PASS cal_status_tamanho"
+  },
+  {
+    "cenario": "aq_inicio_real",
+    "exit_code": 0,
+    "saida": "PASS aq_inicio_real"
+  },
+  {
+    "cenario": "aq_ids_distintos",
+    "exit_code": 0,
+    "saida": "PASS aq_ids_distintos"
+  },
+  {
+    "cenario": "aq_mesma_medicao",
+    "exit_code": 0,
+    "saida": "PASS aq_mesma_medicao"
+  },
+  {
+    "cenario": "aq_frequencias_independentes",
+    "exit_code": 0,
+    "saida": "PASS aq_frequencias_independentes"
+  },
+  {
+    "cenario": "aq_nao_reenvia_ultima",
+    "exit_code": 0,
+    "saida": "PASS aq_nao_reenvia_ultima"
+  },
+  {
+    "cenario": "aq_finalizacao",
+    "exit_code": 0,
+    "saida": "PASS aq_finalizacao"
+  },
+  {
+    "cenario": "aq_espera_timeout",
+    "exit_code": 0,
+    "saida": "PASS aq_espera_timeout"
+  },
+  {
+    "cenario": "aq_cancelar_preparacao",
+    "exit_code": 0,
+    "saida": "PASS aq_cancelar_preparacao"
+  },
+  {
+    "cenario": "aq_flash_sem_espaco",
+    "exit_code": 0,
+    "saida": "PASS aq_flash_sem_espaco"
+  },
+  {
+    "cenario": "aq_cabecalho_falha",
+    "exit_code": 0,
+    "saida": "PASS aq_cabecalho_falha"
+  },
+  {
+    "cenario": "aq_amostra_parcial",
+    "exit_code": 0,
+    "saida": "PASS aq_amostra_parcial"
+  },
+  {
+    "cenario": "aq_rodape_falha",
+    "exit_code": 0,
+    "saida": "PASS aq_rodape_falha"
+  },
+  {
+    "cenario": "aq_flush_falha",
+    "exit_code": 0,
+    "saida": "PASS aq_flush_falha"
+  },
+  {
+    "cenario": "aq_sensor_registro_falho",
+    "exit_code": 0,
+    "saida": "PASS aq_sensor_registro_falho"
+  },
+  {
+    "cenario": "aq_reconectar",
+    "exit_code": 0,
+    "saida": "PASS aq_reconectar"
+  },
+  {
+    "cenario": "aq_recuperacao_boot",
+    "exit_code": 0,
+    "saida": "PASS aq_recuperacao_boot"
+  },
+  {
+    "cenario": "aq_arquivo_antigo",
+    "exit_code": 0,
+    "saida": "PASS aq_arquivo_antigo"
+  },
+  {
+    "cenario": "aq_espaco_esgota",
+    "exit_code": 0,
+    "saida": "PASS aq_espaco_esgota"
+  },
+  {
+    "cenario": "aq_corrupcao_amostra",
+    "exit_code": 0,
+    "saida": "PASS aq_corrupcao_amostra"
+  },
+  {
+    "cenario": "aq_limites_json",
+    "exit_code": 0,
+    "saida": "PASS aq_limites_json"
+  },
+  {
+    "cenario": "aq_radio_falha_continua",
+    "exit_code": 0,
+    "saida": "PASS aq_radio_falha_continua"
+  },
+  {
+    "cenario": "aq_falha_reabertura",
+    "exit_code": 0,
+    "saida": "PASS aq_falha_reabertura"
+  },
+  {
+    "cenario": "aq_sensor_antigo_inicio",
+    "exit_code": 0,
+    "saida": "PASS aq_sensor_antigo_inicio"
+  },
+  {
+    "cenario": "ar_multiplos",
+    "exit_code": 0,
+    "saida": "PASS ar_multiplos"
+  },
+  {
+    "cenario": "ar_metadados",
+    "exit_code": 0,
+    "saida": "PASS ar_metadados"
+  },
+  {
+    "cenario": "ar_campos_invalidos",
+    "exit_code": 0,
+    "saida": "PASS ar_campos_invalidos"
+  },
+  {
+    "cenario": "ar_dedup_metadados",
+    "exit_code": 0,
+    "saida": "PASS ar_dedup_metadados"
+  },
+  {
+    "cenario": "ar_paginacao",
+    "exit_code": 0,
+    "saida": "PASS ar_paginacao"
+  },
+  {
+    "cenario": "ar_pagina_revisao",
+    "exit_code": 0,
+    "saida": "PASS ar_pagina_revisao"
+  },
+  {
+    "cenario": "ar_listar_adquirindo",
+    "exit_code": 0,
+    "saida": "PASS ar_listar_adquirindo"
+  },
+  {
+    "cenario": "ar_blocos",
+    "exit_code": 0,
+    "saida": "PASS ar_blocos"
+  },
+  {
+    "cenario": "ar_blocos_dedup",
+    "exit_code": 0,
+    "saida": "PASS ar_blocos_dedup"
+  },
+  {
+    "cenario": "ar_recuperar_incompleto",
+    "exit_code": 0,
+    "saida": "PASS ar_recuperar_incompleto"
+  },
+  {
+    "cenario": "ar_crc_amostra",
+    "exit_code": 0,
+    "saida": "PASS ar_crc_amostra"
+  },
+  {
+    "cenario": "ar_crc_cabecalho",
+    "exit_code": 0,
+    "saida": "PASS ar_crc_cabecalho"
+  },
+  {
+    "cenario": "ar_crc_rodape",
+    "exit_code": 0,
+    "saida": "PASS ar_crc_rodape"
+  },
+  {
+    "cenario": "ar_excluir_selecionados",
+    "exit_code": 0,
+    "saida": "PASS ar_excluir_selecionados"
+  },
+  {
+    "cenario": "ar_protecao_gravacao",
+    "exit_code": 0,
+    "saida": "PASS ar_protecao_gravacao"
+  },
+  {
+    "cenario": "ar_protecao_transmissao",
+    "exit_code": 0,
+    "saida": "PASS ar_protecao_transmissao"
+  },
+  {
+    "cenario": "ar_excluir_todos",
+    "exit_code": 0,
+    "saida": "PASS ar_excluir_todos"
+  },
+  {
+    "cenario": "ar_excluir_todos_protegido",
+    "exit_code": 0,
+    "saida": "PASS ar_excluir_todos_protegido"
+  },
+  {
+    "cenario": "ar_excluir_todos_sem_confirmar",
+    "exit_code": 0,
+    "saida": "PASS ar_excluir_todos_sem_confirmar"
+  },
+  {
+    "cenario": "ar_exclusao_falha",
+    "exit_code": 0,
+    "saida": "PASS ar_exclusao_falha"
+  },
+  {
+    "cenario": "ar_espaco",
+    "exit_code": 0,
+    "saida": "PASS ar_espaco"
+  },
+  {
+    "cenario": "ar_sem_espaco_preserva",
+    "exit_code": 0,
+    "saida": "PASS ar_sem_espaco_preserva"
+  },
+  {
+    "cenario": "ar_falha_novo_preserva",
+    "exit_code": 0,
+    "saida": "PASS ar_falha_novo_preserva"
+  },
+  {
+    "cenario": "ar_montagem_sem_formatar",
+    "exit_code": 0,
+    "saida": "PASS ar_montagem_sem_formatar"
+  },
+  {
+    "cenario": "ar_legado",
+    "exit_code": 0,
+    "saida": "PASS ar_legado"
+  },
+  {
+    "cenario": "ar_formato_futuro",
+    "exit_code": 0,
+    "saida": "PASS ar_formato_futuro"
+  },
+  {
+    "cenario": "ar_ids_inseguros",
+    "exit_code": 0,
+    "saida": "PASS ar_ids_inseguros"
+  },
+  {
+    "cenario": "ar_catalogo_backpressure",
+    "exit_code": 0,
+    "saida": "PASS ar_catalogo_backpressure"
+  },
+  {
+    "cenario": "ar_metadados_maximos",
+    "exit_code": 0,
+    "saida": "PASS ar_metadados_maximos"
+  },
+  {
+    "cenario": "ar_colisao_ids",
+    "exit_code": 0,
+    "saida": "PASS ar_colisao_ids"
+  },
+  {
+    "cenario": "ar_reboot_gravar",
+    "exit_code": 0,
+    "saida": "PASS ar_reboot_gravar"
+  },
+  {
+    "cenario": "ar_reboot_ler",
+    "exit_code": 0,
+    "saida": "PASS ar_reboot_ler"
+  },
+  {
+    "cenario": "ar_falha_listagem",
+    "exit_code": 0,
+    "saida": "PASS ar_falha_listagem"
+  },
+  {
+    "cenario": "ar_falha_abrir_detalhes",
+    "exit_code": 0,
+    "saida": "PASS ar_falha_abrir_detalhes"
+  },
+  {
+    "cenario": "ar_diretorio_falha",
+    "exit_code": 0,
+    "saida": "PASS ar_diretorio_falha"
+  },
+  {
+    "cenario": "ar_limites_parametros",
+    "exit_code": 0,
+    "saida": "PASS ar_limites_parametros"
+  },
+  {
+    "cenario": "ar_limites_respostas",
+    "exit_code": 0,
+    "saida": "PASS ar_limites_respostas"
+  },
+  {
+    "cenario": "ar_protecao_ultimo_pacote",
+    "exit_code": 0,
+    "saida": "PASS ar_protecao_ultimo_pacote"
+  },
+  {
+    "cenario": "ar_protecao_pacote_ao_vivo",
+    "exit_code": 0,
+    "saida": "PASS ar_protecao_pacote_ao_vivo"
+  },
+  {
+    "cenario": "ar_nomes_paginados",
+    "exit_code": 0,
+    "saida": "PASS ar_nomes_paginados"
+  },
+  {
+    "cenario": "lr_formato_integridade",
+    "exit_code": 0,
+    "saida": "PASS lr_formato_integridade"
+  },
+  {
+    "cenario": "lr_local_nao_confirmado",
+    "exit_code": 0,
+    "saida": "PASS lr_local_nao_confirmado"
+  },
+  {
+    "cenario": "lr_sem_receptor",
+    "exit_code": 0,
+    "saida": "PASS lr_sem_receptor"
+  },
+  {
+    "cenario": "lr_reenvio_timeout",
+    "exit_code": 0,
+    "saida": "PASS lr_reenvio_timeout"
+  },
+  {
+    "cenario": "lr_pedir_atual",
+    "exit_code": 0,
+    "saida": "PASS lr_pedir_atual"
+  },
+  {
+    "cenario": "lr_reparo_metadados_dados",
+    "exit_code": 0,
+    "saida": "PASS lr_reparo_metadados_dados"
+  },
+  {
+    "cenario": "lr_controles_invalidos",
+    "exit_code": 0,
+    "saida": "PASS lr_controles_invalidos"
+  },
+  {
+    "cenario": "lr_cancelar_fases",
+    "exit_code": 0,
+    "saida": "PASS lr_cancelar_fases"
+  },
+  {
+    "cenario": "lr_consultar_ids_dedup",
+    "exit_code": 0,
+    "saida": "PASS lr_consultar_ids_dedup"
+  },
+  {
+    "cenario": "lr_ids_obrigatorios",
+    "exit_code": 0,
+    "saida": "PASS lr_ids_obrigatorios"
+  },
+  {
+    "cenario": "lr_operacoes_concorrentes",
+    "exit_code": 0,
+    "saida": "PASS lr_operacoes_concorrentes"
+  },
+  {
+    "cenario": "lr_radio_ocupado",
+    "exit_code": 0,
+    "saida": "PASS lr_radio_ocupado"
+  },
+  {
+    "cenario": "lr_corrupcao_previa",
+    "exit_code": 0,
+    "saida": "PASS lr_corrupcao_previa"
+  },
+  {
+    "cenario": "lr_falhas_preparo_tx",
+    "exit_code": 0,
+    "saida": "PASS lr_falhas_preparo_tx"
+  },
+  {
+    "cenario": "lr_limites_tempo_reparos",
+    "exit_code": 0,
+    "saida": "PASS lr_limites_tempo_reparos"
+  },
+  {
+    "cenario": "lr_usb_ausente",
+    "exit_code": 0,
+    "saida": "PASS lr_usb_ausente"
+  },
+  {
+    "cenario": "lr_tamanho_status",
+    "exit_code": 0,
+    "saida": "PASS lr_tamanho_status"
+  },
+  {
+    "cenario": "lr_confirmacao_antiga",
+    "exit_code": 0,
+    "saida": "PASS lr_confirmacao_antiga"
+  },
+  {
+    "cenario": "lr_dedup_parametros",
+    "exit_code": 0,
+    "saida": "PASS lr_dedup_parametros"
+  },
+  {
+    "cenario": "lr_fragmento_final",
+    "exit_code": 0,
+    "saida": "PASS lr_fragmento_final"
+  },
+  {
+    "cenario": "lr_reenvio_dados",
+    "exit_code": 0,
+    "saida": "PASS lr_reenvio_dados"
+  },
+  {
+    "cenario": "lr_falha_leitura_dados",
+    "exit_code": 0,
+    "saida": "PASS lr_falha_leitura_dados"
+  },
+  {
+    "cenario": "lr_ruido_nao_estende_prazo",
+    "exit_code": 0,
+    "saida": "PASS lr_ruido_nao_estende_prazo"
+  }
+]

@@ -1,0 +1,25 @@
+DIAGNOSTICO SPI LOOPBACK V0.18 — TCC BRAVO
+
+OBJETIVO
+Verificar GPIO23 (MOSI), GPIO19 (MISO) e a transferencia do periférico SPI do ESP32, sem a Flash conectada. O sketch nao acessa nem modifica memoria.
+
+ANTES DE LIGAR:
+1) Desligar o ESP32 do USB e de qualquer outra alimentacao.
+2) Desconectar COMPLETAMENTE o modulo Flash (todos os fios, inclusive VCC/GND) e o modulo LoRa.
+3) Ligar apenas UM jumper entre GPIO23 (MOSI) e GPIO19 (MISO) no ESP32. Nao ligar 3V3/GND neste jumper.
+4) Manter a ignicao FISICAMENTE desabilitada.
+5) Carregar Diagnostico_SPI_Loopback_V018.ino no Arduino IDE, conectar USB e abrir Monitor Serial a 115200 baud.
+
+INTERPRETACAO
+- PASSOU em 100 kHz e 1 MHz: GPIO23/GPIO19 e transferencia SPI do ESP32 funcionaram neste arranjo. NAO valida CS=13, SCK=18, circuito, alimentacao ou Flash.
+- FALHOU: conferir a ponte entre GPIO23 e GPIO19, pinagem e ambiente de compilacao antes de suspeitar do ESP32.
+
+Nao execute loopback com Flash conectada: a saida MISO da Flash poderia conflitar eletricamente com MOSI, dependendo do estado da Flash.
+
+REFERENCIA
+Arquivos originais consultados, sem modificacao:
+- Bancada_Empuxo_V0_18_Flash_Externa(2).zip
+- Diagnostico_SPI_V018_Controle(1).zip
+
+ESTADO DA VALIDACAO
+Codigo inspecionado estaticamente. Nao compilado nem executado em hardware neste ambiente.

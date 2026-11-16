@@ -1,0 +1,35 @@
+TCC BRAVO - Diagnostico isolado GPIO SCK / CS para ESP32 DevKit V1
+
+OBJETIVO
+Testar duas saidas GPIO nao cobertas pelo loopback SPI MOSI-MISO anterior.
+Nao testa Flash nem valida a forma de onda SPI SCK.
+
+PREPARACAO - sempre com ESP32 DESLIGADO do USB:
+- Desconectar completamente a Flash e o LoRa.
+- Manter o circuito de ignicao fisicamente desabilitado.
+- Remover o jumper anterior GPIO23-GPIO19.
+
+TESTE 1 - SCK (GPIO18)
+1. Colocar UM unico jumper GPIO18 -> GPIO19.
+2. Conectar o ESP32 via USB e carregar o sketch.
+3. Monitor Serial: 115200 baud.
+4. Digitar S e enviar; registrar o resultado.
+
+TESTE 2 - CS (GPIO13)
+1. Desligar o USB.
+2. Remover o jumper GPIO18-GPIO19.
+3. Colocar UM unico jumper GPIO13 -> GPIO19.
+4. Reconectar o USB (sem necessidade de alterar/carregar novamente o sketch).
+5. Monitor Serial: digitar C e enviar; registrar o resultado.
+
+ESPERADO
+Em cada teste, alto=80/80, baixo=80/80 - PASSOU.
+
+INTERPRETACAO
+PASSOU significa que o pino GPIO testado pode conduzir HIGH e LOW e ser lido pelo GPIO19 usando esse jumper.
+Nao confirma qualidade do clock SPI, CS no modulo, integridade da Flash ou alimentacao.
+FALHOU exige rever jumper, pinos, GPIO e configuracao.
+
+SEGURANCA
+Sem memoria conectada; nenhum comando de memoria, escrita, apagamento ou formatacao.
+Nao unir pinos GPIO a 3V3/GND para este teste. Nunca mover os jumpers com a placa alimentada.

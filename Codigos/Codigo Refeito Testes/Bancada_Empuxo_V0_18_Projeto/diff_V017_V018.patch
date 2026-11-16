@@ -1,0 +1,944 @@
+--- a/Bancada_Empuxo_V0_17/Armazenamento.h
++++ b/Bancada_Empuxo_V0_18/Armazenamento.h
+@@ -1,5 +1,5 @@
+ #pragma once
+-// LittleFS interno. Nenhuma rotina deste arquivo formata a particao.
++// Formato 3 preservado; arquivos na Flash externa. Sem acesso ao LittleFS interno.
+ #include <stddef.h>
+ #include <errno.h>
+ 
+@@ -7,7 +7,7 @@
+ const char *ID_LEGADO = "LEGADO_ENSAIO_BIN";
+ const uint32_t MAGIC_ENSAIO = 0x42454E33, MAGIC_FIM = 0x46494D33;
+ const uint32_t FORMATO_GRAVACAO = 3;
+-const size_t RESERVA_FLASH = 8192; // margem para metadados/blocos do LittleFS
++const size_t RESERVA_FLASH = 8192; // margem para metadados/blocos do FlashEnsaios
+ const uint8_t LIMITE_BLOCO = 4;
+ 
+ struct Payload {
+@@ -86,7 +86,7 @@
+     memchr(cab.celulaId, 0, sizeof(cab.celulaId)) && memchr(cab.perfilId, 0, sizeof(cab.perfilId));
+ }
+ 
+-bool lerFechamento(File &arquivo, CabecalhoEnsaio &cab, RodapeEnsaio &fim) {
++bool lerFechamento(ArquivoFlash &arquivo, CabecalhoEnsaio &cab, RodapeEnsaio &fim) {
+   if (!arquivo || arquivo.size() < sizeof(cab) || !arquivo.seek(0) ||
+       arquivo.read((uint8_t *)&cab, sizeof(cab)) != sizeof(cab) || !cabecalhoValido(cab) ||
+       arquivo.size() < sizeof(cab) + sizeof(fim) || !arquivo.seek(arquivo.size() - sizeof(fim)) ||
+@@ -98,7 +98,7 @@
+     (fim.resultado != 1 || fim.amostras > 0);
+ }
+ 
+-bool lerAmostra(File &arquivo, const CabecalhoEnsaio &cab, uint32_t indice, Payload &p) {
++bool lerAmostra(ArquivoFlash &arquivo, const CabecalhoEnsaio &cab, uint32_t indice, Payload &p) {
+   if (!indice) return false;
+   uint64_t pos = sizeof(cab) + (uint64_t)(indice - 1) * sizeof(RegistroAmostra);
+   RegistroAmostra registro = {};
+@@ -124,7 +124,7 @@
+ InformacaoArquivo inspecionarArquivo(const char *id) {
+   InformacaoArquivo info;
+   char caminho[64]; caminhoEnsaio(id, caminho, sizeof(caminho));
+-  File f = LittleFS.open(caminho, FILE_READ);
++  ArquivoFlash f = FlashEnsaios.open(caminho, FLASH_LEITURA);
+   if (!f || f.isDirectory()) { f.close(); return info; }
+   info.existe = true; info.bytes = f.size();
+   uint32_t prefixo[2] = {};
+@@ -162,7 +162,7 @@
+ // Varredura cooperativa, independente da ordem interna do diretorio.
+ // Seleciona os menores IDs > cursor. Apenas uma entrada por chamada a passo().
+ struct PaginaCatalogo {
+-  File diretorio;
++  ArquivoFlash diretorio;
+   char apos[32] = {};
+   char ids[LIMITE_BLOCO][32] = {};
+   uint8_t quantidade = 0, limite = LIMITE_BLOCO;
+@@ -172,7 +172,7 @@
+     diretorio.close();
+     strcpy(apos, cursor); quantidade = 0; limite = maximo;
+     mais = false; legadoPendente = true; concluida = false; falhou = false;
+-    diretorio = LittleFS.open(DIRETORIO_ENSAIOS, FILE_READ);
++    diretorio = FlashEnsaios.open(DIRETORIO_ENSAIOS, FLASH_LEITURA);
+     if (!diretorio || !diretorio.isDirectory()) { diretorio.close(); return false; }
+     return true;
+   }
+@@ -192,7 +192,7 @@
+     if (concluida) return;
+     if (legadoPendente) {
+       legadoPendente = false;
+-      if (LittleFS.exists("/ensaio.bin")) considerar(ID_LEGADO);
++      if (FlashEnsaios.exists("/ensaio.bin")) considerar(ID_LEGADO);
+       return;
+     }
+     bool eDiretorio = false;
+--- /dev/null
++++ b/Bancada_Empuxo_V0_18/BackendExterno.h
+@@ -0,0 +1,212 @@
++#pragma once
++#ifdef BANCADA_TESTE_ARQUIVOS
++#include <backend_mock.h>
++#else
++#include "FlashNor.h"
++#include "src/littlefs/lfs.h"
++#include <memory>
++#include <string>
++#include <errno.h>
++#include <new>
++
++constexpr int FLASH_LEITURA = 0, FLASH_NOVO = 1;
++class BackendExterno;
++struct EstadoArquivoFlash {
++  BackendExterno *dono = nullptr;
++  lfs_file_t arquivo = {};
++  lfs_dir_t diretorio = {};
++  lfs_file_config config = {};
++  uint8_t cache[256] = {};
++  bool aberto = false, dir = false, escrita = false, falhou = false;
++  std::string caminho;
++  bool fechar();
++  ~EstadoArquivoFlash() { fechar(); }
++};
++class ArquivoFlash {
++  friend class BackendExterno;
++  std::shared_ptr<EstadoArquivoFlash> h;
++ public:
++  explicit operator bool() const { return h && h->aberto; }
++  bool isDirectory() const { return *this && h->dir; }
++  size_t size() const;
++  bool seek(size_t pos);
++  size_t read(uint8_t *p, size_t n);
++  size_t write(const uint8_t *p, size_t n);
++  bool flush();
++  bool close() { bool ok = !h || h->fechar(); h.reset(); return ok; }
++  std::string getNextFileName(bool *dir);
++};
++
++class BackendExterno {
++ public:
++  FlashNor nor;
++  lfs_t fs = {};
++  lfs_config cfg = {};
++  bool montado = false;
++  int ultimoErro = 0;
++  uint8_t leitura[256] = {}, programa[256] = {}, lookahead[64] = {};
++  size_t espacoCache = 0, pendenteEspaco = 0;
++  uint32_t ultimoEspaco = 0;
++  bool espacoValido = false;
++  uint32_t escritores = 0;
++
++  BackendExterno() {
++    cfg.context = this;
++    cfg.read = ler; cfg.prog = gravar; cfg.erase = apagar; cfg.sync = sincronizar;
++    cfg.read_size = 16; cfg.prog_size = 256; cfg.block_size = 4096;
++    cfg.block_count = FLASH_CAPACIDADE / 4096; cfg.block_cycles = 100;
++    cfg.cache_size = 256; cfg.lookahead_size = 64;
++    cfg.read_buffer = leitura; cfg.prog_buffer = programa; cfg.lookahead_buffer = lookahead;
++    cfg.name_max = 63; cfg.file_max = FLASH_CAPACIDADE; cfg.attr_max = 0;
++  }
++  BackendExterno(const BackendExterno &) = delete;
++  BackendExterno &operator=(const BackendExterno &) = delete;
++  bool escritaHabilitada() const { return nor.escrita && !nor.falha && montado; }
++  const char *diagnostico() const {
++    if (nor.falha || !nor.identificada) return nor.erro;
++    if (!montado) return "FS_NAO_MONTADO";
++    if (ultimoErro < 0) return "FS_ERRO";
++    return nor.escrita ? "OK" : "SOMENTE_LEITURA";
++  }
++  bool resultado(int r) { if (r < 0) { ultimoErro = r; return false; } return true; }
++  static BackendExterno &self(const lfs_config *c) { return *static_cast<BackendExterno *>(c->context); }
++  static bool valido(const lfs_config *c, lfs_block_t b, lfs_off_t o, lfs_size_t n) {
++    return b < c->block_count && o <= c->block_size && n <= c->block_size - o;
++  }
++  static int ler(const lfs_config *c, lfs_block_t b, lfs_off_t o, void *p, lfs_size_t n) {
++    return valido(c,b,o,n) && self(c).nor.read(b*4096+o,p,n) ? 0 : LFS_ERR_IO;
++  }
++  static int gravar(const lfs_config *c, lfs_block_t b, lfs_off_t o, const void *p, lfs_size_t n) {
++    return valido(c,b,o,n) && self(c).nor.program(b*4096+o,p,n) ? 0 : LFS_ERR_IO;
++  }
++  static int apagar(const lfs_config *c, lfs_block_t b) {
++    return valido(c,b,0,4096) && self(c).nor.erase(b*4096) ? 0 : LFS_ERR_IO;
++  }
++  static int sincronizar(const lfs_config *c) { return self(c).nor.sync() ? 0 : LFS_ERR_IO; }
++  bool begin(bool formatar = false) {
++    // Nem o parametro true autoriza formatacao. API compatibilidade da base.
++    if (formatar || montado) return montado && !formatar;
++    ultimoErro = 0;
++    if (!nor.begin()) return false;
++    montado = resultado(lfs_mount(&fs, &cfg));
++    espacoValido = false; return montado;
++  }
++  bool end() {
++    if (!montado) return true;
++    bool ok = resultado(lfs_unmount(&fs)); montado = false; return ok;
++  }
++  bool exists(const char *p) {
++    lfs_info info = {};
++    if (!montado) return false;
++    int r = lfs_stat(&fs,p,&info);
++    if (r != LFS_ERR_NOENT) resultado(r);
++    return r == 0;
++  }
++  bool mkdir(const char *p) {
++    if (!escritaHabilitada()) return false;
++    espacoValido = false; return resultado(lfs_mkdir(&fs,p));
++  }
++  bool remove(const char *p) {
++    if (!escritaHabilitada()) return false;
++    espacoValido = false; return resultado(lfs_remove(&fs,p));
++  }
++  size_t totalBytes() const { return FLASH_CAPACIDADE; }
++  size_t usedBytes() {
++    if (!montado || nor.falha) return FLASH_CAPACIDADE + 1;
++    if (!espacoValido || (!escritores && (uint32_t)((uint32_t)millis()-ultimoEspaco) >= 1000)) {
++      lfs_ssize_t blocos = lfs_fs_size(&fs);
++      if (!resultado(blocos)) return FLASH_CAPACIDADE + 1;
++      espacoCache = (size_t)blocos * 4096; pendenteEspaco = 0;
++      ultimoEspaco = millis(); espacoValido = true;
++    }
++    size_t estimativa = espacoCache + pendenteEspaco;
++    return estimativa < FLASH_CAPACIDADE ? estimativa : FLASH_CAPACIDADE;
++  }
++  ArquivoFlash open(const char *p, int modo = FLASH_LEITURA) {
++    ArquivoFlash f;
++    if (!montado || (modo == FLASH_NOVO && !escritaHabilitada())) return f;
++    // Fazer a varredura antes de iniciar o escritor; evitar catalogacao por amostra.
++    if (modo == FLASH_NOVO && usedBytes() > FLASH_CAPACIDADE) return f;
++    auto *estado = new(std::nothrow) EstadoArquivoFlash;
++    if (!estado) { ultimoErro = LFS_ERR_NOMEM; return f; }
++    f.h.reset(estado); estado->dono = this; estado->caminho = p;
++    lfs_info info = {};
++    int r = lfs_stat(&fs,p,&info);
++    if (r < 0 && r != LFS_ERR_NOENT) { resultado(r); f.h.reset(); return f; }
++    estado->dir = r == 0 && info.type == LFS_TYPE_DIR;
++    if (estado->dir && modo == FLASH_LEITURA) r = lfs_dir_open(&fs,&estado->diretorio,p);
++    else if (estado->dir) r = LFS_ERR_ISDIR;
++    else {
++      estado->config.buffer = estado->cache;
++      // EXCL, nunca TRUNC: protege arquivos existentes inclusive em falha de exists().
++      int flags = modo == FLASH_NOVO ? LFS_O_WRONLY|LFS_O_CREAT|LFS_O_EXCL : LFS_O_RDONLY;
++      r = lfs_file_opencfg(&fs,&estado->arquivo,p,flags,&estado->config);
++    }
++    if (!resultado(r)) { f.h.reset(); return f; }
++    estado->aberto = true; estado->escrita = modo == FLASH_NOVO;
++    if (estado->escrita) { ++escritores; pendenteEspaco += 4096; }
++    return f;
++  }
++#ifdef BANCADA_PROVISIONAMENTO
++  // Somente no utilitario separado. Nunca chamado pelo firmware principal.
++  bool prepararVazia(bool autorizado) {
++    if (!autorizado || montado || !nor.escrita || !nor.begin()) return false;
++    uint8_t pagina[256];
++    for (uint32_t a = 0; a < FLASH_CAPACIDADE; a += sizeof(pagina)) {
++      if (!nor.read(a,pagina,sizeof(pagina))) return false;
++      for (uint8_t b : pagina) if (b != 0xff) { ultimoErro = LFS_ERR_EXIST; return false; }
++    }
++    if (!resultado(lfs_format(&fs,&cfg)) || !begin(false)) return false;
++    return mkdir("/ensaios");
++  }
++#endif
++};
++
++inline bool EstadoArquivoFlash::fechar() {
++  if (!aberto) return !falhou;
++  int r = dir ? lfs_dir_close(&dono->fs,&diretorio) : lfs_file_close(&dono->fs,&arquivo);
++  aberto = false;
++  if (escrita) { --dono->escritores; dono->espacoValido = false; }
++  if (!dono->resultado(r)) falhou = true;
++  return !falhou;
++}
++inline size_t ArquivoFlash::size() const {
++  if (!*this || h->dir) return 0;
++  lfs_soff_t n = lfs_file_size(&h->dono->fs,&h->arquivo);
++  return h->dono->resultado(n) ? (size_t)n : 0;
++}
++inline bool ArquivoFlash::seek(size_t pos) {
++  if (!*this || h->dir || pos > size()) return false;
++  return h->dono->resultado(lfs_file_seek(&h->dono->fs,&h->arquivo,pos,LFS_SEEK_SET));
++}
++inline size_t ArquivoFlash::read(uint8_t *p, size_t n) {
++  if (!*this || h->dir) return 0;
++  lfs_ssize_t r = lfs_file_read(&h->dono->fs,&h->arquivo,p,n);
++  return h->dono->resultado(r) ? (size_t)r : 0;
++}
++inline size_t ArquivoFlash::write(const uint8_t *p, size_t n) {
++  if (!*this || h->dir || h->falhou || !h->dono->escritaHabilitada()) return 0;
++  lfs_ssize_t r = lfs_file_write(&h->dono->fs,&h->arquivo,p,n);
++  if (!h->dono->resultado(r) || (size_t)r != n) { h->falhou = true; return 0; }
++  h->dono->pendenteEspaco += 2*n; // margem conservadora entre varreduras de espaco.
++  return r;
++}
++inline bool ArquivoFlash::flush() {
++  if (!*this || h->dir || h->falhou) return false;
++  bool ok = h->dono->resultado(lfs_file_sync(&h->dono->fs,&h->arquivo));
++  if (!ok) h->falhou = true;
++  return ok;
++}
++inline std::string ArquivoFlash::getNextFileName(bool *dir) {
++  if (!*this || !h->dir) { errno = EBADF; return {}; }
++  lfs_info info = {};
++  int r;
++  do { r = lfs_dir_read(&h->dono->fs,&h->diretorio,&info); }
++  while (r > 0 && (!strcmp(info.name,".") || !strcmp(info.name,"..")));
++  if (r < 0) { errno = EIO; h->dono->resultado(r); return {}; }
++  if (!r) return {};
++  *dir = info.type == LFS_TYPE_DIR;
++  return h->caminho + "/" + info.name;
++}
++static BackendExterno FlashEnsaios;
++#endif
+--- a/Bancada_Empuxo_V0_17/Bancada_Empuxo_V0_17.ino
++++ b/Bancada_Empuxo_V0_18/Bancada_Empuxo_V0_18.ino
+@@ -1,19 +1,21 @@
+-// Bancada de Empuxo V0.17 - Protocolo USB JSON 2 e diagnosticos.
+-// Base: V0.16. USB: objetos JSON completos terminados por LF (protocolo 2).
++// Bancada de Empuxo V0.18 - Protocolo USB JSON 2 e diagnosticos.
++// Base: V0.17. USB: objetos JSON completos terminados por LF (protocolo 2).
+ // Todas as mensagens da aplicacao na serial sao JSON, uma por linha.
+ #include <Arduino.h>
+ #include <esp_random.h>
+ #include <HX711.h>
+ #include <SPI.h>
+ #include <LoRa.h>
+-#include <LittleFS.h>
++#include "BackendExterno.h"
++#include "ConfiguracaoFlash.h"
++#include "RadioPolling.h"
+ #include <ArduinoJson.h> // ArduinoJson 7.x
+ #include <ctype.h>
+ #include <math.h>
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-const char *VERSAO_FIRMWARE = "0.17";
++const char *VERSAO_FIRMWARE = "0.18";
+ const int VERSAO_PROTOCOLO = 2;
+ 
+ // Pinagem e configuracao de radio preservadas da V0.9 anexada.
+@@ -84,7 +86,7 @@
+ 
+ HX711 celula;
+ bool loraPronto = false;
+-volatile bool loraTransmitindo = false; // atualizado pela interrupcao TX_DONE
++bool loraTransmitindo = false; // atualizado por polling de TX_DONE no loop
+ bool memoriaPronta = false;
+ bool calibracaoConfigurada = false;
+ bool taraPronta = false;
+@@ -100,7 +102,7 @@
+ unsigned long inicioEnsaio = 0;
+ unsigned long ultimoEnvio = 0;
+ unsigned long ultimaLeituraHX = 0;
+-File arquivoEnsaio;
++ArquivoFlash arquivoEnsaio;
+ uint32_t amostrasGravadas = 0;
+ uint32_t amostrasParaEnviar = 0;
+ uint32_t amostrasEnviadas = 0;
+@@ -207,6 +209,12 @@
+   doc["codigo"] = codigo;
+   doc["origem"] = origem;
+   doc["descricao"] = descricao;
++  if (!strcmp(origem, "Flash")) {
++    doc["backend"] = "LittleFS_externo";
++    doc["diagnostico"] = FlashEnsaios.diagnostico();
++    doc["jedec"] = FlashEnsaios.nor.jedec;
++    doc["erro_fs"] = FlashEnsaios.ultimoErro;
++  }
+   publicar(doc);
+ }
+ 
+@@ -344,7 +352,10 @@
+   doc["sensor"]["tara_em_andamento"] = taraEmAndamento;
+   adicionarCalibracao(doc);
+   doc["armazenamento"]["pronto"] = memoriaPronta;
+-  doc["armazenamento"]["tipo"] = "LittleFS_interno";
++  doc["armazenamento"]["tipo"] = "LittleFS_externo";
++  doc["armazenamento"]["diagnostico"] = FlashEnsaios.diagnostico();
++  doc["armazenamento"]["jedec"] = FlashEnsaios.nor.jedec;
++  doc["armazenamento"]["escrita"] = FlashEnsaios.escritaHabilitada();
+   doc["armazenamento"]["catalogo_revisao"] = revisaoCatalogo;
+   doc["armazenamento"]["multiplos_ensaios"] = true;
+   doc["armazenamento"]["formato"] = FORMATO_GRAVACAO;
+@@ -462,7 +473,7 @@
+   return true;
+ }
+ 
+-// Callback publico da biblioteca: nao faz SPI, Serial ou gravacao na interrupcao.
++// Conclusao local, chamada pelo polling no loop (nenhuma ISR acessa SPI).
+ void aoConcluirTransmissaoLoRa() {
+   loraTransmitindo = false;
+ }
+@@ -525,9 +536,10 @@
+   bool completo = arquivoEnsaio && arquivoEnsaio.size() == sizeof(CabecalhoEnsaio) +
+                   (uint64_t)amostrasGravadas * sizeof(RegistroAmostra);
+   bool gravouFim = completo && arquivoEnsaio.write((const uint8_t *)&fim, sizeof(fim)) == sizeof(fim);
+-  arquivoEnsaio.flush(); // API void: confirmar tambem apos fechar e reabrir.
+-  arquivoEnsaio.close();
+-  File verificar = LittleFS.open(caminhoGravacao, FILE_READ);
++  bool sincronizou = arquivoEnsaio.flush();
++  bool fechou = arquivoEnsaio.close();
++  gravouFim = gravouFim && sincronizou && fechou;
++  ArquivoFlash verificar = FlashEnsaios.open(caminhoGravacao, FLASH_LEITURA);
+   CabecalhoEnsaio cabLido = {};
+   RodapeEnsaio fimLido = {};
+   resumo.fechamentoConfirmado = gravouFim && lerFechamento(verificar, cabLido, fimLido) &&
+@@ -588,20 +600,24 @@
+     emitirErro("ENSAIO_ID_ESGOTADO", "ESP32", "Reinicie para gerar uma nova sessao.");
+     return false;
+   }
+-  size_t total = LittleFS.totalBytes(), usado = LittleFS.usedBytes();
++  if (!FlashEnsaios.escritaHabilitada()) {
++    emitirErro("FLASH_SOMENTE_LEITURA", "Flash", "Gravacao bloqueada por configuracao ou falha do backend.");
++    return false;
++  }
++  size_t total = FlashEnsaios.totalBytes(), usado = FlashEnsaios.usedBytes();
+   if (usado > total || total - usado < RESERVA_FLASH + sizeof(CabecalhoEnsaio) + sizeof(RegistroAmostra) + sizeof(RodapeEnsaio)) {
+     emitirErro("FLASH_SEM_ESPACO", "Flash", "Sem espaco e margem para criar outro ensaio; nenhum anterior foi removido.");
+     return false;
+   }
+-  // Um unico escritor no loop. Nunca abrir FILE_WRITE em um caminho existente.
++  // Um unico escritor no loop. Nunca abrir FLASH_NOVO em um caminho existente.
+   char novoId[32]; bool livre = false;
+   for (uint8_t tentativa = 0; tentativa < 32 && contadorEnsaios < UINT32_MAX; tentativa++) {
+     snprintf(novoId, sizeof(novoId), "%s-%lu", sessao, (unsigned long)++contadorEnsaios);
+     caminhoEnsaio(novoId, caminhoGravacao, sizeof(caminhoGravacao));
+-    if (!LittleFS.exists(caminhoGravacao)) { livre = true; break; }
++    if (!FlashEnsaios.exists(caminhoGravacao)) { livre = true; break; }
+   }
+   if (!livre) { emitirErro("ENSAIO_ID_COLISAO", "Flash", "Nao foi encontrado identificador livre; arquivos preservados."); return false; }
+-  arquivoEnsaio = LittleFS.open(caminhoGravacao, FILE_WRITE);
++  arquivoEnsaio = FlashEnsaios.open(caminhoGravacao, FLASH_NOVO);
+   if (!arquivoEnsaio) { emitirErro("FLASH_ABERTURA", "Flash", "Nao foi possivel criar novo arquivo."); return false; }
+   revisaoCatalogo++;
+   amostrasGravadas = 0;
+@@ -623,13 +639,13 @@
+   }
+   cab.crc = crc32(&cab, offsetof(CabecalhoEnsaio, crc));
+   bool gravou = arquivoEnsaio.write((const uint8_t *)&cab, sizeof(cab)) == sizeof(cab);
+-  arquivoEnsaio.flush(); ultimoFlush = millis();
+-  File verificar = LittleFS.open(caminhoGravacao, FILE_READ);
++  bool sincronizouCab = arquivoEnsaio.flush(); ultimoFlush = millis();
++  ArquivoFlash verificar = FlashEnsaios.open(caminhoGravacao, FLASH_LEITURA);
+   CabecalhoEnsaio relido = {};
+   bool confirmou = verificar && verificar.read((uint8_t *)&relido, sizeof(relido)) == sizeof(relido) &&
+                   cabecalhoValido(relido) && !memcmp(&cab, &relido, sizeof(cab));
+   verificar.close();
+-  if (!gravou || !confirmou) {
++  if (!gravou || !sincronizouCab || !confirmou) {
+     arquivoEnsaio.close(); resumo.resultado = "FALHOU"; strcpy(resumo.motivo, "FLASH_CABECALHO");
+     emitirErro("FLASH_CABECALHO", "Flash", "Novo arquivo incompleto; anteriores preservados."); return false;
+   }
+@@ -715,7 +731,7 @@
+     emitirErro("FORMATO_NAO_SUPORTADO", "Flash", "Registro legado preservado; envio automatico indisponivel."); return false;
+   }
+   caminhoEnsaio(selecionado, caminhoTransmissao, sizeof(caminhoTransmissao));
+-  arquivoEnsaio = LittleFS.open(caminhoTransmissao, FILE_READ);
++  arquivoEnsaio = FlashEnsaios.open(caminhoTransmissao, FLASH_LEITURA);
+   if (!arquivoEnsaio || arquivoEnsaio.size() == 0) {
+     if (arquivoEnsaio) arquivoEnsaio.close();
+     emitirErro("SEM_ENSAIO", "Flash", "Nenhum ensaio gravado.");
+@@ -1105,23 +1121,25 @@
+   pinMode(LED_LORA, OUTPUT);
+   digitalWrite(LED_EXEC, LOW);
+   digitalWrite(LED_LORA, LOW);
+-  emitirEvento("BOOT", "Bancada V0.17 iniciando.");
+-
+-  memoriaPronta = LittleFS.begin(false); // Nunca formatar automaticamente na inicializacao
+-  if (!memoriaPronta) emitirErro("FLASH_INICIALIZACAO", "Flash", "Falha ao montar a flash interna.");
+-  if (memoriaPronta && !LittleFS.exists(DIRETORIO_ENSAIOS) && !LittleFS.mkdir(DIRETORIO_ENSAIOS)) {
++  emitirEvento("BOOT", "Bancada V0.18 iniciando.");
++
++  pinMode(FLASH_CS, OUTPUT); digitalWrite(FLASH_CS, HIGH);
++  pinMode(LORA_CS, OUTPUT); digitalWrite(LORA_CS, HIGH);
++  SPI.begin(SPI_SCK_BANCADA, SPI_MISO_BANCADA, SPI_MOSI_BANCADA, LORA_CS);
++  memoriaPronta = FlashEnsaios.begin(false); // Nunca formatar automaticamente na inicializacao
++  if (!memoriaPronta) emitirErro("FLASH_INICIALIZACAO", "Flash", "Flash externa indisponivel; consulte STATUS. Nenhuma formatacao executada.");
++  if (memoriaPronta && !FlashEnsaios.exists(DIRETORIO_ENSAIOS)) {
+     memoriaPronta = false;
+-    emitirErro("FLASH_DIRETORIO", "Flash", "Nao foi possivel preparar o diretorio; conteudo preservado.");
+-  }
+-
+-  SPI.begin(18, 19, 23, LORA_CS);
++    emitirErro("FLASH_DIRETORIO", "Flash", "Diretorio de ensaios ausente; preparar memoria separadamente. Conteudo preservado.");
++  }
++
+   LoRa.setPins(LORA_CS, LORA_RST, LORA_DIO0);
+   LoRa.setSPIFrequency(1000000);
+   loraPronto = LoRa.begin(915E6);
+   if (loraPronto) {
+     LoRa.setSyncWord(145);
+     LoRa.setTxPower(2);
+-    LoRa.onTxDone(aoConcluirTransmissaoLoRa);
++    LoRa.onTxDone(nullptr);
+   } else {
+     emitirErro("LORA_INICIALIZACAO", "LoRa", "Falha ao iniciar o LoRa.");
+   }
+@@ -1141,6 +1159,7 @@
+ }
+ 
+ void loop() {
++  if (loraTransmitindo && radioTxConcluido()) aoConcluirTransmissaoLoRa();
+   atenderSaidaUSB();
+   ReceberComando();
+   atualizarTara();
+@@ -1170,7 +1189,7 @@
+       RegistroAmostra registro = {};
+       registro.dados = payload;
+       registro.crc = crc32(&registro, offsetof(RegistroAmostra, crc));
+-      size_t total = LittleFS.totalBytes(), usado = LittleFS.usedBytes();
++      size_t total = FlashEnsaios.totalBytes(), usado = FlashEnsaios.usedBytes();
+       if (!isfinite(payload.empuxo)) {
+         emitirErro("MEDICAO_INVALIDA", "HX711", "O calculo de empuxo produziu um valor nao finito.");
+         encerrarEnsaio("MEDICAO_INVALIDA");
+@@ -1199,7 +1218,13 @@
+           publicar(doc);
+         }
+         informarAmostra();
+-        if (millis() - ultimoFlush >= 1000) { arquivoEnsaio.flush(); ultimoFlush = millis(); }
++        if (millis() - ultimoFlush >= 1000) {
++          bool sincronizou = arquivoEnsaio.flush(); ultimoFlush = millis();
++          if (!sincronizou) {
++            emitirErro("FLASH_FLUSH", "Flash", "Falha ao persistir amostras; ensaio interrompido.");
++            encerrarEnsaio("FLASH_FLUSH");
++          }
++        }
+       } else {
+         emitirErro("FLASH_GRAVACAO", "Flash", "Falha ao gravar uma amostra; registro nao sera concluido normalmente.");
+         encerrarEnsaio("FLASH_GRAVACAO");
+--- a/Bancada_Empuxo_V0_17/ComandosArmazenamento.h
++++ b/Bancada_Empuxo_V0_18/ComandosArmazenamento.h
+@@ -18,7 +18,7 @@
+ 
+ bool exigirMemoria() {
+   if (memoriaPronta) return true;
+-  emitirErro("FLASH_INDISPONIVEL", "Flash", "LittleFS indisponivel; nenhum arquivo sera formatado ou removido.");
++  emitirErro("FLASH_INDISPONIVEL", "Flash", "FlashEnsaios indisponivel; nenhum arquivo sera formatado ou removido.");
+   return false;
+ }
+ 
+@@ -68,13 +68,16 @@
+ 
+ void consultarEspaco() {
+   if (!exigirMemoria()) return;
+-  size_t total = LittleFS.totalBytes(), usado = LittleFS.usedBytes();
++  size_t total = FlashEnsaios.totalBytes(), usado = FlashEnsaios.usedBytes();
+   if (usado > total) { emitirErro("FLASH_ESPACO", "Flash", "Contabilidade do sistema de arquivos inconsistente."); return; }
+   JsonDocument doc; prepararRespostaCatalogo(doc);
+   doc["total_bytes"] = total; doc["usado_bytes"] = usado; doc["livre_bytes"] = total - usado;
+   doc["reserva_bytes"] = RESERVA_FLASH;
+   doc["disponivel_estimado_bytes"] = total - usado > RESERVA_FLASH ? total - usado - RESERVA_FLASH : 0;
+-  doc["backend"] = "LittleFS_interno"; doc["catalogo_revisao"] = revisaoCatalogo;
++  doc["backend"] = "LittleFS_externo";
++  doc["jedec"] = FlashEnsaios.nor.jedec; doc["diagnostico"] = FlashEnsaios.diagnostico();
++  doc["escrita"] = FlashEnsaios.escritaHabilitada();
++  doc["erro_fs"] = FlashEnsaios.ultimoErro; doc["catalogo_revisao"] = revisaoCatalogo;
+   publicar(doc);
+ }
+ 
+@@ -95,7 +98,7 @@
+   if (!info.cabecalhoOk) { emitirErro("FORMATO_NAO_SUPORTADO", "Flash", "Cabecalho corrompido, legado ou formato nao suportado; arquivo preservado."); return; }
+   if (inicio > (uint64_t)info.slots + 1) { emitirErro("BLOCO_FORA_LIMITE", "Flash", "inicio ultrapassa a ultima amostra disponivel mais um."); return; }
+   char caminho[64]; caminhoEnsaio(id, caminho, sizeof(caminho));
+-  File f = LittleFS.open(caminho, FILE_READ);
++  ArquivoFlash f = FlashEnsaios.open(caminho, FLASH_LEITURA);
+   if (!f) { emitirErro("FLASH_LEITURA", "Flash", "Nao foi possivel abrir as amostras."); return; }
+   JsonDocument doc; prepararRespostaCatalogo(doc);
+   char bloco[64]; snprintf(bloco, sizeof(bloco), "%s:%lu:%u", id, (unsigned long)inicio, limite);
+@@ -122,8 +125,9 @@
+ const char *excluirArquivo(const char *id, bool protegidoInicial = false) {
+   if (protegidoInicial || arquivoProtegido(id)) return "ENSAIO_PROTEGIDO";
+   char caminho[64]; caminhoEnsaio(id, caminho, sizeof(caminho));
+-  if (!LittleFS.exists(caminho)) return "NAO_ENCONTRADO";
+-  if (!LittleFS.remove(caminho) || LittleFS.exists(caminho)) return "FLASH_EXCLUSAO";
++  if (!FlashEnsaios.escritaHabilitada()) return "FLASH_SOMENTE_LEITURA";
++  if (!FlashEnsaios.exists(caminho)) return "NAO_ENCONTRADO";
++  if (!FlashEnsaios.remove(caminho) || FlashEnsaios.exists(caminho)) return "FLASH_EXCLUSAO";
+   revisaoCatalogo++;
+   if (!strcmp(id, resumo.id)) resumo.resultado = "EXCLUIDO";
+   return "EXCLUIDO";
+--- /dev/null
++++ b/Bancada_Empuxo_V0_18/ConfiguracaoFlash.h
+@@ -0,0 +1,12 @@
++#pragma once
++#include <stdint.h>
++// Entrega segura: somente leitura. Habilitar apenas apos validar/autorizar a memoria.
++#ifndef FLASH_PERMITIR_ESCRITA
++#define FLASH_PERMITIR_ESCRITA 0
++#endif
++constexpr int FLASH_CS = 13;
++constexpr int SPI_SCK_BANCADA = 18, SPI_MISO_BANCADA = 19, SPI_MOSI_BANCADA = 23;
++constexpr int SPI_CS_RADIO = 21;
++constexpr uint32_t FLASH_CAPACIDADE = 2097152;
++constexpr uint32_t FLASH_JEDEC_ESPERADO = 0xEF4015;
++constexpr uint32_t FLASH_SPI_HZ = 1000000;
+--- /dev/null
++++ b/Bancada_Empuxo_V0_18/FlashNor.h
+@@ -0,0 +1,111 @@
++#pragma once
++#include <Arduino.h>
++#include <SPI.h>
++#include <stdint.h>
++#include <string.h>
++#include "ConfiguracaoFlash.h"
++
++// Unico dono: loop/setup. Nao chamar de ISR ou de outra task.
++class FlashNor {
++ public:
++  uint32_t jedec = 0;
++  const char *erro = "NAO_INICIADA";
++  bool identificada = false;
++  bool escrita = FLASH_PERMITIR_ESCRITA != 0;
++  bool falha = false;
++  uint32_t programas = 0, apagamentos = 0, esperaMaxMs = 0;
++
++  void selecionar() {
++    SPI.beginTransaction(SPISettings(FLASH_SPI_HZ, MSBFIRST, SPI_MODE0));
++    digitalWrite(FLASH_CS, LOW);
++  }
++  void liberar() { digitalWrite(FLASH_CS, HIGH); SPI.endTransaction(); }
++  uint8_t status(uint8_t comando = 0x05) {
++    selecionar(); SPI.transfer(comando); uint8_t s = SPI.transfer(0xff); liberar(); return s;
++  }
++  bool rejeitar(const char *motivo) { erro = motivo; falha = true; return false; }
++  bool aguardar(uint32_t limite = 600) {
++    uint32_t inicio = millis();
++    do {
++      uint8_t s = status();
++      if (s == 0xff) return rejeitar("FLASH_SEM_RESPOSTA");
++      if (!(s & 1)) {
++        uint32_t t = (uint32_t)millis() - inicio;
++        if (t > esperaMaxMs) esperaMaxMs = t;
++        return true;
++      }
++      delay(1); // CS alto, barramento livre; nao desabilitar interrupcoes.
++    } while ((uint32_t)((uint32_t)millis() - inicio) < limite);
++    return rejeitar("FLASH_BUSY_TIMEOUT");
++  }
++  bool begin() {
++    falha = false; identificada = false;
++    selecionar(); SPI.transfer(0x9f);
++    jedec = (uint32_t)SPI.transfer(0xff) << 16;
++    jedec |= (uint32_t)SPI.transfer(0xff) << 8;
++    jedec |= SPI.transfer(0xff); liberar();
++    if (jedec != FLASH_JEDEC_ESPERADO) return rejeitar("JEDEC_NAO_SUPORTADO");
++    if (!aguardar()) return false;
++    identificada = true; erro = "OK"; return true;
++  }
++  bool limites(uint32_t endereco, size_t n) const {
++    return endereco <= FLASH_CAPACIDADE && n <= FLASH_CAPACIDADE - endereco;
++  }
++  void endereco24(uint32_t a) {
++    SPI.transfer((uint8_t)(a >> 16)); SPI.transfer((uint8_t)(a >> 8)); SPI.transfer((uint8_t)a);
++  }
++  bool read(uint32_t a, void *destino, size_t n) {
++    if (!identificada || !limites(a, n)) return rejeitar("FLASH_LEITURA_LIMITE");
++    if (!aguardar()) return false;
++    auto *p = static_cast<uint8_t *>(destino);
++    // Transacoes curtas mesmo para varredura de setores.
++    while (n) {
++      size_t parte = n > 256 ? 256 : n;
++      selecionar(); SPI.transfer(0x03); endereco24(a);
++      for (size_t i = 0; i < parte; ++i) p[i] = SPI.transfer(0xff);
++      liberar(); a += parte; p += parte; n -= parte;
++    }
++    return true;
++  }
++  bool habilitarGravacao() {
++    if (!identificada || !escrita || falha) { erro = "FLASH_ESCRITA_BLOQUEADA"; return false; }
++    if (!aguardar()) return false;
++    // Nao remover protecoes do chip nem alterar registradores de status.
++    if ((status() & 0x1c) || (status(0x35) & 0x40)) return rejeitar("FLASH_PROTEGIDA");
++    selecionar(); SPI.transfer(0x06); liberar();
++    if (!(status() & 2)) return rejeitar("FLASH_WEL_FALHOU");
++    return true;
++  }
++  bool program(uint32_t a, const void *dados, size_t n) {
++    if (!limites(a, n)) return rejeitar("FLASH_PROGRAMA_LIMITE");
++    const auto *p = static_cast<const uint8_t *>(dados);
++    uint8_t comparar[256];
++    while (n) {
++      size_t parte = 256 - (a & 255); if (parte > n) parte = n;
++      if (!read(a, comparar, parte)) return false;
++      for (size_t i = 0; i < parte; ++i)
++        if ((comparar[i] & p[i]) != p[i]) return rejeitar("FLASH_REQUER_ERASE");
++      if (!habilitarGravacao()) return false;
++      selecionar(); SPI.transfer(0x02); endereco24(a);
++      for (size_t i = 0; i < parte; ++i) SPI.transfer(p[i]);
++      liberar(); ++programas;
++      if (!aguardar(20) || !read(a, comparar, parte)) return false;
++      if (memcmp(comparar, p, parte)) return rejeitar("FLASH_PROGRAMA_VERIFICACAO");
++      a += parte; p += parte; n -= parte;
++    }
++    return true;
++  }
++  bool erase(uint32_t a) {
++    if ((a & 4095) || !limites(a, 4096)) return rejeitar("FLASH_ERASE_LIMITE");
++    if (!habilitarGravacao()) return false;
++    selecionar(); SPI.transfer(0x20); endereco24(a); liberar(); ++apagamentos;
++    if (!aguardar()) return false;
++    uint8_t bloco[256];
++    for (uint32_t off = 0; off < 4096; off += sizeof(bloco)) {
++      if (!read(a + off, bloco, sizeof(bloco))) return false;
++      for (uint8_t b : bloco) if (b != 0xff) return rejeitar("FLASH_ERASE_VERIFICACAO");
++    }
++    return true;
++  }
++  bool sync() { return identificada && !falha && aguardar(); }
++};
+--- /dev/null
++++ b/Bancada_Empuxo_V0_18/RadioPolling.h
+@@ -0,0 +1,15 @@
++#pragma once
++// Sem onTxDone: LoRa 0.8.0 acessa SPI antes de chamar o callback da aplicacao.
++// Consultar IRQ_FLAGS do SX127x no loop evita SPI concorrente com a Flash.
++inline bool radioTxConcluido() {
++  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0));
++  digitalWrite(SPI_CS_RADIO, LOW);
++  SPI.transfer(0x12); uint8_t flags = SPI.transfer(0);
++  digitalWrite(SPI_CS_RADIO, HIGH); SPI.endTransaction();
++  if (!(flags & 0x08) || flags == 0xff) return false;
++  SPI.beginTransaction(SPISettings(1000000, MSBFIRST, SPI_MODE0));
++  digitalWrite(SPI_CS_RADIO, LOW);
++  SPI.transfer(0x92); SPI.transfer(0x08);
++  digitalWrite(SPI_CS_RADIO, HIGH); SPI.endTransaction();
++  return true;
++}
+--- a/Bancada_Empuxo_V0_17/TransferenciaLoRa.h
++++ b/Bancada_Empuxo_V0_18/TransferenciaLoRa.h
+@@ -77,7 +77,7 @@
+ void terminarTransferencia(const char *codigo,const char *fase,const char *descricao) {
+   // Cancelamento local aborta RX/TX; nao equivale a cancelamento confirmado remotamente.
+   LoRa.idle();loraTransmitindo=false;digitalWrite(LED_LORA,LOW);
+-  LoRa.onTxDone(aoConcluirTransmissaoLoRa);
++  LoRa.onTxDone(nullptr);
+   arquivoEnsaio.close();enviandoGravado=false;idEnvio=0;idTransmissao[0]=0;
+   transferencia.etapa=Transferencia::TERMINADA;transferencia.resultado=codigo;
+   eventoTransferencia(codigo,fase,descricao,true);
+@@ -123,7 +123,7 @@
+   transferencia.repeticoes++;transferencia.etapa=Transferencia::PRONTA;
+ }
+ void receberControleTransferencia() {
+-  // onTxDone fica desativado em RX: a ISR da biblioteca nao pode consumir RX_DONE antes do polling.
++  // RX e TX usam polling: a biblioteca nao instala ISR com acesso SPI.
+   int n=LoRa.parsePacket();if(n<=0)return;
+   uint8_t buf[LORA_QUADRO_MAX];size_t lidos=0;
+   while(LoRa.available()&&lidos<255) {
+@@ -197,7 +197,7 @@
+       if(!arquivoEnsaio.seek(offset)||arquivoEnsaio.read(dados,n)!=n) { terminarTransferencia("FLASH_LEITURA","falhou","Falha ao ler bloco para envio.");return; }
+     }
+     size_t bytes=montarQuadro(quadro,tipo,transferencia.seq,dados,n);
+-    LoRa.idle();LoRa.onTxDone(aoConcluirTransmissaoLoRa);
++    LoRa.idle();LoRa.onTxDone(nullptr);
+     if(!LoRa.beginPacket()||LoRa.write(quadro,bytes)!=bytes) {
+       terminarTransferencia("LORA_ENVIO","falhou","Nao foi possivel preparar o quadro no radio.");return;
+     }
+--- a/validacao_nativa/test_firmware.cpp
++++ b/validacao_nativa/test_firmware.cpp
+@@ -2,8 +2,9 @@
+ #include <sstream>
+ #include <cstdlib>
+ #include <fstream>
++#define BANCADA_TESTE_ARQUIVOS
+ #define loop loopFirmware
+-#include "../Bancada_Empuxo_V0_17/Bancada_Empuxo_V0_17.ino"
++#include "../Bancada_Empuxo_V0_18/Bancada_Empuxo_V0_18.ino"
+ #undef loop
+ #define CHECK(x) do {if(!(x)){std::cerr<<"FAIL line "<<__LINE__<<": "<<#x<<'\n';exit(1);}}while(0)
+ void loop(){LoRa.tick();loopFirmware();}
+@@ -119,7 +120,7 @@
+ 
+   if(test=="identidade"){
+     input(request(0,"IDENTIFICAR",false));auto d=last("resposta");
+-    CHECK(d["firmware"]=="0.17"&&d["id"]==0&&d["baud"]==115200);
++    CHECK(d["firmware"]=="0.18"&&d["id"]==0&&d["baud"]==115200);
+     CHECK(d["sessao"].as<JsonString>().size()==16&&d["dispositivo"]=="ESP32-AABBCCDDEEFF");
+     CHECK(maiorId==0);cmd(1,"STATUS");d=last("resposta");
+     CHECK(d["sensor"]["tara_pronta"]==true&&d["calibracao"]["unidade"]=="kgf");
+@@ -196,7 +197,7 @@
+     record();cmd(3,"ENVIAR");failRead=true;loop();flush();
+     CHECK(!enviandoGravado&&last("evento")["fase"]=="falhou"&&last("evento")["id"]==3);
+   }else if(test=="timeout_radio"){
+-    record();cmd(3,"ENVIAR");esperarTX();LoRa.txDone=nullptr;fakeMillis+=5000;loop();flush();
++    record();cmd(3,"ENVIAR");esperarTX();LoRa.txDoneHabilitado=false;fakeMillis+=5000;loop();flush();
+     CHECK(!enviandoGravado&&!loraPronto&&last("evento")["fase"]=="falhou");
+     CHECK(count("codigo","LORA_TX_TIMEOUT")==1);
+   }else if(test=="falha_sensor"){
+@@ -247,7 +248,7 @@
+     CHECK(Serial.baud==115200&&celula.dt==33&&celula.sck==32);
+     CHECK(SPI.args==std::vector<int>({18,19,23,21})&&LoRa.pins==std::vector<int>({21,14,26}));
+     CHECK(LoRa.frequency==915E6&&LoRa.sync==145&&LoRa.power==2&&LoRa.spiHz==1000000);
+-    CHECK(modes.size()==2&&!LittleFS.formatFlag);
++    CHECK(modes.size()==4&&modes[13]==OUTPUT&&modes[21]==OUTPUT&&pins[13]==HIGH&&pins[21]==HIGH&&!LittleFS.formatFlag);
+   }else if(test=="cal_padrao"){
+     cmd(1,"CONSULTAR_CALIBRACAO");auto d=last("resposta");
+     CHECK(d["calibracao"]["coeficiente"]==1&&d["calibracao"]["configurada"]==false&&d["calibracao"]["valida"]==false);
+@@ -450,7 +451,7 @@
+     cmd(4294967291U,"STATUS");CHECK(count("codigo","JSON_MEMORIA")==0&&measureJson(last("resposta"))<RESPOSTA_MAX);
+     cmd(4294967292U,"FINALIZAR");cmd(4294967293U,"INICIAR");CHECK(!ensaioAtivo&&count("codigo","ENSAIO_ID_ESGOTADO")==1);
+   }else if(test=="aq_radio_falha_continua"){
+-    cmd(1,"INICIAR_LORA");sample();LoRa.txDone=nullptr;
++    cmd(1,"INICIAR_LORA");sample();LoRa.txDoneHabilitado=false;
+     for(int i=0;i<51;i++){fakeMillis+=100;loop();flush();}
+     CHECK(ensaioAtivo&&aquisicaoIniciada&&pins[LED_EXEC]==HIGH&&!transmitirLoRa&&!loraPronto&&amostrasGravadas==52);
+     CHECK(count("codigo","LORA_TX_TIMEOUT")==1);cmd(2,"FINALIZAR");CHECK(resumo.fechamentoConfirmado&&!strcmp(resumo.resultado,"CONCLUIDO"));
+@@ -589,7 +590,7 @@
+     cmd(1,"ESPACO");auto before=last("resposta");auto id=novoEnsaio(2);(void)id;
+     cmd(4,"ESPACO");auto after=last("resposta");CHECK(after["usado_bytes"].as<size_t>()>before["usado_bytes"].as<size_t>());
+     CHECK(after["total_bytes"].as<size_t>()==after["usado_bytes"].as<size_t>()+after["livre_bytes"].as<size_t>());
+-    CHECK(after["reserva_bytes"]==RESERVA_FLASH&&after["backend"]=="LittleFS_interno");
++    CHECK(after["reserva_bytes"]==RESERVA_FLASH&&after["backend"]=="LittleFS_externo");
+   }else if(test=="ar_sem_espaco_preserva"){
+     auto a=novoEnsaio(1),b=novoEnsaio(3);auto bytesA=arquivoDe(a)->bytes,bytesB=arquivoDe(b)->bytes;
+     LittleFS.capacity=LittleFS.usedBytes()+RESERVA_FLASH;cmd(5,"INICIAR");
+@@ -704,7 +705,7 @@
+     concluirRadio();CHECK(remontarRadio()==original&&arquivoDe(resumo.id)->bytes==original);
+     CHECK(transferencia.confirmados==transferencia.blocos&&amostrasConfirmadasEmBlocos()==3);
+     CHECK(count("codigo","TRANSFERENCIA_INICIADA")==1&&count("codigo","ENVIO_LOCAL_CONCLUIDO")==1&&count("codigo","ENVIO_CONFIRMADO")==1);
+-    CHECK(!loraTransmitindo&&pins[LED_LORA]==LOW&&LoRa.txDone==aoConcluirTransmissaoLoRa);
++    CHECK(!loraTransmitindo&&pins[LED_LORA]==LOW&&LoRa.txDone==nullptr);
+   }else if(test=="lr_local_nao_confirmado"){
+     record();cmd(3,"ENVIAR");concluirRadio(false);CHECK(enviandoGravado&&transferencia.localConcluido&&!transferencia.confirmado);
+     responderPeer(BT_ACK,transferencia.seq);CHECK(enviandoGravado&&!transferencia.confirmado);
+@@ -741,7 +742,7 @@
+   }else if(test=="lr_cancelar_fases"){
+     record();cmd(3,"ENVIAR");cmd(4,"CANCELAR");CHECK(!enviandoGravado&&LoRa.packets.empty());
+     cmd(5,"ENVIAR");esperarTX();CHECK(pins[LED_LORA]==HIGH);cmd(6,"CANCELAR");CHECK(!loraTransmitindo&&!LoRa.pending&&pins[LED_LORA]==LOW);
+-    cmd(7,"ENVIAR");esperarControle();CHECK(LoRa.txDone==nullptr&&pins[LED_LORA]==LOW);cmd(8,"CANCELAR");CHECK(!enviandoGravado&&LoRa.txDone==aoConcluirTransmissaoLoRa);
++    cmd(7,"ENVIAR");esperarControle();CHECK(LoRa.txDone==nullptr&&pins[LED_LORA]==LOW);cmd(8,"CANCELAR");CHECK(!enviandoGravado&&LoRa.txDone==nullptr);
+     CHECK(count("codigo","ENVIO_CANCELADO")==3&&arquivoDe(resumo.id));
+   }else if(test=="lr_consultar_ids_dedup"){
+     record();cmd(3,"ENVIAR");std::string tid=transferencia.id;
+--- a/validacao_nativa/mocks/mock_hw.h
++++ b/validacao_nativa/mocks/mock_hw.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ #include <algorithm>
++#include <cstdio>
+ #include <cerrno>
+ #include <cstdint>
+ #include <cstring>
+@@ -11,6 +12,7 @@
+ 
+ constexpr int OUTPUT=1, LOW=0, HIGH=1;
+ inline unsigned long fakeMillis=0;
++inline uint8_t radioFlags=0;
+ inline std::map<int,int> pins, modes;
+ inline unsigned long millis(){return fakeMillis;}
+ inline void delay(unsigned long n){fakeMillis+=n;}
+@@ -21,6 +23,7 @@
+   std::string output;
+   int baud=0;
+   int capacidadeTX=64;
++  template<class... A> void printf(const char* fmt,A... args){char b[512];std::snprintf(b,sizeof(b),fmt,args...);output+=b;}
+   int availableForWrite(){return capacidadeTX;}
+   void begin(int v){baud=v;}
+   int available(){return (int)input.size();}
+@@ -46,18 +49,38 @@
+   void set_offset(long v){offset=v;}
+ };
+ #endif
++constexpr int MSBFIRST=1, SPI_MODE0=0;
++class SPISettings {public: SPISettings(unsigned long,int,int){};};
++#ifdef BANCADA_SPI_NOR
++#include "nor_bus.h"
++#else
+ struct SPIMock {
++  uint8_t command=0; bool first=true;
++  void beginTransaction(const SPISettings&){first=true;}
++  void endTransaction(){}
++  uint8_t transfer(uint8_t b){if(first){command=b;first=false;return 0;}if(command==0x12)return radioFlags;if(command==0x92)radioFlags&=~b;return 0;}
++
+   std::vector<int> args;
+   void begin(int a,int b,int c,int d){args={a,b,c,d};}
+ };
+ inline SPIMock SPI;
++#endif
+ #ifdef TEST_REAL_LORA_API
+ using byte=uint8_t;
+ using SPIClass=SPIMock;
+-class SPISettings {};
++
+ class Stream {public: size_t print(const char*); virtual ~Stream()=default;};
+ #else
+ struct LoRaMock {
++  void acessoSPI(uint8_t reg,uint8_t valor=0){
++#ifdef BANCADA_SPI_NOR
++    digitalWrite(21,LOW);SPI.beginTransaction(SPISettings(1000000,MSBFIRST,SPI_MODE0));
++    SPI.transfer(reg);SPI.transfer(valor);SPI.endTransaction();digitalWrite(21,HIGH);
++#else
++    (void)reg;(void)valor;
++#endif
++  }
++
+   bool ready=true, writeFail=false, endFail=false;
+   unsigned long txEnd=0, txDuration=100, spiHz=0;
+   double frequency=0;
+@@ -67,17 +90,17 @@
+   std::string current;
+   void setPins(int a,int b,int c){pins={a,b,c};}
+   void setSPIFrequency(unsigned long f){spiHz=f;}
+-  bool begin(double f){frequency=f;return ready;}
++  bool begin(double f){acessoSPI(0x42);frequency=f;return ready;}
+   void setSyncWord(int v){sync=v;}
+   void setTxPower(int v){power=v;}
+   void (*txDone)()=nullptr;
+-  bool pending=false;
++  bool pending=false, txDoneHabilitado=true;
+   bool rxMode=false;
+   std::deque<std::string> incoming;
+   std::string rxCurrent;size_t rxPos=0;
+   void feedPacket(const std::string& data){incoming.push_back(data);}
+   int parsePacket(){
+-    rxMode=true;if(incoming.empty())return 0;
++    acessoSPI(0x12);rxMode=true;if(incoming.empty())return 0;
+     rxCurrent=incoming.front();incoming.pop_front();rxPos=0;return rxCurrent.size();
+   }
+   int available(){return rxCurrent.size()-rxPos;}
+@@ -85,13 +108,13 @@
+   size_t write(const uint8_t* data,size_t n){current.assign((const char*)data,n);return writeFail?0:n;}
+   void onTxDone(void (*cb)()){txDone=cb;}
+   void idle(){pending=false;txEnd=fakeMillis;}
+-  void tick(){if(pending&&fakeMillis>=txEnd){pending=false;if(txDone)txDone();}}
++  void tick(){if(pending&&fakeMillis>=txEnd){pending=false;if(txDoneHabilitado)radioFlags|=8;if(txDone)txDone();}}
+ private:
+   bool isTransmitting(){return fakeMillis<txEnd;}
+ public:
+-  int beginPacket(){if(isTransmitting())return 0;rxMode=false;current.clear();return 1;}
++  int beginPacket(){acessoSPI(0x01);if(isTransmitting())return 0;radioFlags&=~8;rxMode=false;current.clear();return 1;}
+   size_t print(const char* s){current=s;return writeFail?0:current.size();}
+-  int endPacket(bool async){if(endFail||!async)return 0;packets.push_back(current);txEnd=fakeMillis+txDuration;pending=true;return 1;}
++  int endPacket(bool async){acessoSPI(0x81,0x83);if(endFail||!async)return 0;packets.push_back(current);txEnd=fakeMillis+txDuration;pending=true;return 1;}
+ };
+ inline LoRaMock LoRa;
+ #endif
+@@ -115,8 +138,8 @@
+   const char* path() const{return pathName.c_str();}
+   size_t size() const{return active&&data?data->bytes.size():0;}
+   size_t position() const{return pos;}
+-  void flush(){++flushCount;if(failFlush && active && data && !data->bytes.empty())data->bytes.pop_back();}
+-  void close(){active=false;}
++  bool flush(){++flushCount;if(failFlush && active && data && !data->bytes.empty())data->bytes.pop_back();return !failFlush;}
++  bool close(){active=false;return true;}
+   size_t write(const uint8_t* src,size_t n){
+     if(!active||dir||mode!=FILE_WRITE)return 0;
+     ++writeCalls;
+@@ -139,7 +162,13 @@
+   }
+ };
+ struct LittleFSMock {
+-  bool ready=true,openFail=false,formatFlag=false,mkdirFail=false,removeFail=false,dirExists=false;
++  struct {uint32_t jedec=0xEF4015;} nor;
++  int ultimoErro=0;
++  bool allowWrite=true;
++  bool escritaHabilitada() const {return allowWrite;}
++  const char* diagnostico() const {return ready?"OK":"FS_NAO_MONTADO";}
++
++  bool ready=true,openFail=false,formatFlag=false,mkdirFail=false,removeFail=false,dirExists=true;
+   unsigned int writeOpens=0;
+   size_t capacity=1048576, otherUsed=0;
+   std::string removeFailPath, openFailPath;
+--- /dev/null
++++ b/validacao_nativa/mocks/backend_mock.h
+@@ -0,0 +1,5 @@
++#pragma once
++#include "mock_hw.h"
++using ArquivoFlash = File;
++#define FlashEnsaios LittleFS
++constexpr int FLASH_LEITURA=FILE_READ, FLASH_NOVO=FILE_WRITE;

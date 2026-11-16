@@ -1,0 +1,13 @@
+TCC - Diagnostico SPI comparativo controlado v1
+
+Somente leitura da identificacao JEDEC (comando 0x9F).
+Ignicao fisicamente desconectada. Preservar a particao da Flash interna do ESP32.
+
+Arduino IDE: abrir Diagnostico_SPI_V018_Controle.ino, compilar, carregar.
+Monitor Serial: 115200 baud. Copiar resultados A, B, C, D, E.
+
+Interpretacao:
+- A=EF 40 15: rotina do diagnostico original ainda funciona no mesmo sketch.
+- B/C/D/E: verificam repetibilidade, byte dummy e CS do LoRa durante transacao.
+- 000000 ou FFFFFF nao identificam por si so a causa; conferir comparacao.
+Nao habilitar escrita nem formatar a memoria externa.

@@ -1,0 +1,10 @@
+Downloading index: library_index.tar.bz2 Download failed: performing HEAD request: Head "https://downloads.arduino.cc/libraries/library_index.tar.bz2": dial tcp: lookup downloads.arduino.cc on 168.63.129.16:53: dial udp 168.63.129.16:53: connect: network is unreachable
+Error initializing instance: Error downloading index 'https://downloads.arduino.cc/libraries/library_index.tar.bz2': Download failed: performing HEAD request: Head "https://downloads.arduino.cc/libraries/library_index.tar.bz2": dial tcp: lookup downloads.arduino.cc on 168.63.129.16:53: dial udp 168.63.129.16:53: connect: network is unreachable
+Error initializing instance: Loading index file: loading json index file /workspace/scratch/74ac2df403ab/build_tools/data/package_index.json: open /workspace/scratch/74ac2df403ab/build_tools/data/package_index.json: no such file or directory
+Error initializing instance: Loading index file: loading json index file /workspace/scratch/74ac2df403ab/build_tools/data/package_esp32_index.json: open /workspace/scratch/74ac2df403ab/build_tools/data/package_esp32_index.json: no such file or directory
+Error initializing instance: Error loading hardware platform: discovery builtin:serial-discovery not found
+Error initializing instance: Error loading hardware platform: discovery builtin:mdns-discovery not found
+Error initializing instance: Loading index file: index file not found: /workspace/scratch/74ac2df403ab/build_tools/data/library_index.json
+Downloading index: package_index.tar.bz2 Download failed: performing HEAD request: Head "https://downloads.arduino.cc/packages/package_index.tar.bz2": dial tcp: lookup downloads.arduino.cc on 168.63.129.16:53: dial udp 168.63.129.16:53: connect: network is unreachable
+Downloading index: package_esp32_index.json Download failed: performing HEAD request: Head "https://espressif.github.io/arduino-esp32/package_esp32_index.json": dial tcp: lookup espressif.github.io on 168.63.129.16:53: dial udp 168.63.129.16:53: connect: network is unreachable
+Some indexes could not be updated.

@@ -1,0 +1,8 @@
+Firmware: 0.17
+Base: 0.16 (Bancada_Empuxo_V0_16_Multiplos_Ensaios.zip)
+Etapa: transferencia completa de ensaio salvo via LoRa
+USB: 115200 baud, protocolo JSON por linha 2
+Amostra USB e LoRa ao vivo: formato 2, kgf
+Arquivo LittleFS: formato 3, preservado da V0.16
+Transporte LoRa gravado: BT/1 (binario, ACK e confirmacao final)
+Somente ESP da bancada; sem interface Python, sem receptor, sem historico.

@@ -1,0 +1,23 @@
+DIAGNOSTICO ISOLADO GPIO13 - DUPLA LEITURA (V0.18)
+
+Objetivo: distinguir sinal no proprio GPIO13 de sinal recebido no GPIO19.
+
+Preparacao (ESP32 sem alimentacao):
+1. Manter circuito de ignicao fisicamente desconectado.
+2. Desconectar COMPLETAMENTE a Flash externa e o LoRa.
+3. Retirar quaisquer fios soltos/adicionais de GPIO13 e GPIO19.
+4. Instalar um UNICO jumper do GPIO13 ao GPIO19; nao ligar a 3V3 ou GND.
+5. Reconectar USB, abrir Monitor Serial a 115200 baud.
+6. Digitar T e pressionar Enter. Registrar ambas as linhas.
+
+Interpretacao preliminar:
+- GPIO13 proprio 80/80 e GPIO19 80/80: caminho de teste funcional.
+- GPIO13 proprio 80/80, GPIO19 instavel: checar contato do jumper
+  e caminho externo; ainda nao prova defeito do GPIO13.
+- GPIO13 proprio instavel: investigar pino, configuracao ou carga externa.
+
+A leitura interna e uma verificacao digital, nao uma medicao eletrica
+independente. Nao verifica SPI, alimentacao da Flash, JEDEC, nem gravacao.
+
+Firmware operacional V0.18: nao alterado.
+Nenhum comando de escrita, apagamento ou formatacao.

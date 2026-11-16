@@ -1,0 +1,25 @@
+TCC BRAVO — Diagnostico GPIO13/GPIO19 bidirecional V0.18
+
+Objetivo
+Verificar se um sinal percorre o jumper entre GPIO13 e GPIO19 em ambas
+as direcoes, usando pulls internos opostos ao sinal para revelar entradas
+flutuantes. Nao altera o firmware da bancada nem acessa a memoria Flash.
+
+Procedimento
+1. Desconecte fisicamente o circuito de ignicao.
+2. Desligue o ESP32 e remova a Flash e o LoRa (todos os fios, inclusive
+   alimentacao). Remova quaisquer outros fios dos GPIO13 e GPIO19.
+3. Instale SOMENTE um jumper GPIO13 <-> GPIO19, SEM conexao com 3V3 ou GND.
+4. Conecte USB; compile e carregue o .ino usando Arduino IDE / ESP32.
+5. Abra o Monitor Serial em 115200 baud, envie T e pressione Enter.
+6. Envie as duas linhas de resultados para interpretacao.
+
+Interpretacao limitada
+- Ambas as direcoes PASSOU: sinal digital atravessa o jumper nos dois sentidos.
+- Ambas FALHOU: suspeita de mau contato, pinagem equivocada ou caminho aberto;
+  nao diagnostica sozinho defeito no microcontrolador.
+- Somente uma direcao falhou: suspeita de comportamento eletrico assimetrico
+  ou configuracao de GPIO; necessita investigacao adicional.
+
+Sem escrita, apagamento ou formatacao de memorias. Nao comprova que CS
+chega ao terminal fisico do chip Flash nem mede tensao de alimentacao.
